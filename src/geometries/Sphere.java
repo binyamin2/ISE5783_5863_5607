@@ -18,6 +18,7 @@ public class Sphere extends RadialGeometry{
     public Sphere(Double radius, Point center) {
         super(radius);
         this.center = center;
+
     }
 
     public Point getCenter() {

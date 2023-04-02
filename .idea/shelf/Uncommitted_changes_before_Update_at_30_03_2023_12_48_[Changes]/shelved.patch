@@ -1,0 +1,76 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"963acc02-6f7d-40d1-83cb-daf4b44206d2\" name=\"Changes\" comment=\"class\">\r\n      <change afterPath=\"$PROJECT_DIR$/src/geometries/Cylinder.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src/geometries/Geometry.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src/geometries/Plane.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src/geometries/Polygon.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src/geometries/RadialGeometry.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src/geometries/Sphere.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src/geometries/Triangle.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src/geometries/Tube.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src/primitives/Double3.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src/primitives/Point.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src/primitives/Ray.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src/primitives/Util.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src/primitives/Vector.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src/test/Main.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/Employee/BasePlusCommissionEmployee.java\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/Employee/CommissionEmployee.java\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/Employee/Employee.java\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/Employee/HourlyEmployee.java\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/Main.java\" beforeDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Interface\" />\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Merge.Settings\">\r\n    <option name=\"BRANCH\" value=\"origin/master\" />\r\n  </component>\r\n  <component name=\"Git.Pull.Settings\">\r\n    <option name=\"OPTIONS\">\r\n      <set>\r\n        <option value=\"NO_COMMIT\" />\r\n      </set>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;\r\n  }\r\n}</component>\r\n  <component name=\"GithubPullRequestsUISettings\">\r\n    <option name=\"selectedUrlAndAccountId\">\r\n      <UrlAndAccount>\r\n        <option name=\"accountId\" value=\"8c2dd40c-e721-4967-a609-9ebb494b04dc\" />\r\n        <option name=\"url\" value=\"https://github.com/binyamin2/ISE5783_5863_5607.git\" />\r\n      </UrlAndAccount>\r\n    </option>\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2M3d64aSkQr03Aw6NcJQuHmHoer\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,\r\n    &quot;last_opened_file_path&quot;: &quot;C:/Users/User/IdeaProjects/ISE5783_5863_5607/src/geometries/Polygon.java&quot;,\r\n    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,\r\n    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;\r\n  }\r\n}</component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"963acc02-6f7d-40d1-83cb-daf4b44206d2\" name=\"Changes\" comment=\"\" />\r\n      <created>1677000024317</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1677000024317</updated>\r\n      <workItem from=\"1677000024711\" duration=\"1000\" />\r\n      <workItem from=\"1677000458920\" duration=\"237000\" />\r\n      <workItem from=\"1677000722873\" duration=\"40000\" />\r\n      <workItem from=\"1677056762689\" duration=\"1083000\" />\r\n      <workItem from=\"1677057881819\" duration=\"170000\" />\r\n      <workItem from=\"1677058540016\" duration=\"2486000\" />\r\n      <workItem from=\"1677492237069\" duration=\"7946000\" />\r\n      <workItem from=\"1677500280553\" duration=\"3933000\" />\r\n    </task>\r\n    <task id=\"LOCAL\u200E-00001\" summary=\"start\">\r\n      <created>1677000663387</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL\u200E-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\u200E\" />\r\n      <updated>1677000663387</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"2\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"start\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"start\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 6eaafa8f6580cd4e953603e65c01dc3e7c7c0fbb)
++++ b/.idea/workspace.xml	(date 1680169485183)
+@@ -4,27 +4,8 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="963acc02-6f7d-40d1-83cb-daf4b44206d2" name="Changes" comment="class">
+-      <change afterPath="$PROJECT_DIR$/src/geometries/Cylinder.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/geometries/Geometry.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/geometries/Plane.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/geometries/Polygon.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/geometries/RadialGeometry.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/geometries/Sphere.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/geometries/Triangle.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/geometries/Tube.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/primitives/Double3.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/primitives/Point.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/primitives/Ray.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/primitives/Util.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/primitives/Vector.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/test/Main.java" afterDir="false" />
++    <list default="true" id="963acc02-6f7d-40d1-83cb-daf4b44206d2" name="Changes" comment="Stage1">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/Employee/BasePlusCommissionEmployee.java" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/Employee/CommissionEmployee.java" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/Employee/Employee.java" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/Employee/HourlyEmployee.java" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -105,7 +86,9 @@
+       <workItem from="1677057881819" duration="170000" />
+       <workItem from="1677058540016" duration="2486000" />
+       <workItem from="1677492237069" duration="7946000" />
+-      <workItem from="1677500280553" duration="3933000" />
++      <workItem from="1677500280553" duration="4692000" />
++      <workItem from="1679933794499" duration="5000" />
++      <workItem from="1680168734295" duration="745000" />
+     </task>
+     <task id="LOCAL‎-00001" summary="start">
+       <created>1677000663387</created>
+@@ -114,7 +97,14 @@
+       <option name="project" value="LOCAL‎" />
+       <updated>1677000663387</updated>
+     </task>
+-    <option name="localTasksCounter" value="2" />
++    <task id="LOCAL‎-00002" summary="Stage1">
++      <created>1677507564471</created>
++      <option name="number" value="00002" />
++      <option name="presentableId" value="LOCAL‎-00002" />
++      <option name="project" value="LOCAL‎" />
++      <updated>1677507564471</updated>
++    </task>
++    <option name="localTasksCounter" value="3" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -133,6 +123,7 @@
+   </component>
+   <component name="VcsManagerConfiguration">
+     <MESSAGE value="start" />
+-    <option name="LAST_COMMIT_MESSAGE" value="start" />
++    <MESSAGE value="Stage1" />
++    <option name="LAST_COMMIT_MESSAGE" value="Stage1" />
+   </component>
+ </project>
+\ No newline at end of file
