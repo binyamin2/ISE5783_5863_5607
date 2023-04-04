@@ -34,7 +34,7 @@ class TubeTest {
         //TC10
         //check the case when the point equivalent to base point
         Point pbvt=new Point(0,0,1);
-        Vector vbvt=temp.subtract(new Point(0,0,0));
+        Vector vbvt=pbvt.subtract(new Point(0,0,0));
         assertDoesNotThrow(() -> tu.getNormal(new Point(0, 0, 1)), "");
         assertEquals(vbvt.normalize(),tu.getNormal(pbvt),
                 "the normal is not correct when the point equivalent to base point");

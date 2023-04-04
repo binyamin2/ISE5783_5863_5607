@@ -24,8 +24,20 @@ public class Tube extends RadialGeometry {
         return axisRay;
     }
 
+    /**
+     * get normal from tube
+     * @param p point on the geometry
+     * @return normalize vector
+     */
     @Override
     public Vector getNormal(Point p) {
-        return null;
+        //find the distance between p0 to o
+        double t=this.axisRay.getV0().dotProduct(p.subtract(axisRay.getP0()));
+        //if  p0 equivalent to p
+        if (t==0)
+            return p.subtract(axisRay.getP0()).normalize();
+        //find o
+        Point o=axisRay.getP0().add(getAxisRay().getV0().scale(t));
+        return p.subtract(o).normalize();
     }
 }

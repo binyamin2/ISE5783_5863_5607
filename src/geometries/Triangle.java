@@ -16,8 +16,4 @@ public class Triangle extends Polygon{
         super(vertices);
     }
 
-    @Override
-    public Vector getNormal(Point point) {
-        return super.getNormal(point);
-    }
 }

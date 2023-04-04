@@ -1,6 +1,8 @@
 package geometries;
 
+import primitives.Point;
 import primitives.Ray;
+import primitives.Vector;
 
 /**
  * class that represent the Cylinder geometry
@@ -24,4 +26,9 @@ public class Cylinder extends Tube{
         return height;
     }
 
+    @Override
+    public Vector getNormal(Point p) {
+        //TODO implement
+        return super.getNormal(p);
+    }
 }

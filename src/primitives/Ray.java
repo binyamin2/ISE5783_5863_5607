@@ -17,6 +17,14 @@ public class Ray {
         this.v0 = v0.normalize();
     }
 
+    public Point getP0() {
+        return p0;
+    }
+
+    public Vector getV0() {
+        return v0;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

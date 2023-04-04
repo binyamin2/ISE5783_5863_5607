@@ -28,14 +28,15 @@ public class Plane implements Geometry{
      * @param q2 point
      */
     public Plane(Point q0, Point q1, Point q2) {
-//TODO check edge cases
         this.q0 = q0;
-        normal = null;
+        Vector v1=q0.subtract(q1);
+        Vector v2=q2.subtract(q1);
+        normal = v1.crossProduct(v2).normalize();
     }
 
     @Override
     public Vector getNormal(Point p) {
-        return null;
+        return this.normal;
     }
 
     public Point getQ0() {
