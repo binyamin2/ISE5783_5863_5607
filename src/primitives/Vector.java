@@ -40,7 +40,7 @@ public class Vector extends Point{
      * @param s double
      * @return vector
      */
-    public Vector scale(Double s){
+    public Vector scale(double s){
         return new Vector(this.xyz.scale(s));
     }
 

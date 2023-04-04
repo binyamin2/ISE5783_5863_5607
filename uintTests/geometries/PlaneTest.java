@@ -9,8 +9,27 @@ import static primitives.Util.isZero;
 
 class PlaneTest {
 
+
     @Test
-    void getNormal() {
+    void testConstractor() {
+
+        // =============== Boundary Values Tests ==================
+        //TC10 two point are the same
+        assertThrows(
+                IllegalArgumentException.class,
+                ()->new Plane(new Point(1,1,2),new Point(1,1,2),new Point(1,1,3)),
+                "2 same point in the plane ctor dont throw exception"
+                );
+        //TC20 all the points on the same vector
+        assertThrows(
+                IllegalArgumentException.class,
+                ()->new Plane(new Point(1,1,0),new Point(1,1,2),new Point(1,1,3)),
+                "all the points on the same vector, plane ctor dont throw exception"
+        );
+
+    }
+    @Test
+    void testGetNormal() {
         // ============ Equivalence Partitions Tests ==============
         // TC01: There is a simple single test here - using a quad
         Point[] pts =

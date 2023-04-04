@@ -10,7 +10,7 @@ import static primitives.Util.isZero;
 class TriangleTest {
 
     @Test
-    void getNormal() {
+    void testGetNormal() {
         // ============ Equivalence Partitions Tests ==============
         // TC01: There is a simple single test here - using a quad
         Point[] pts =

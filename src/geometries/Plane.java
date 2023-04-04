@@ -28,7 +28,7 @@ public class Plane implements Geometry{
      * @param q2 point
      */
     public Plane(Point q0, Point q1, Point q2) {
-
+//TODO check edge cases
         this.q0 = q0;
         normal = null;
     }
@@ -45,4 +45,5 @@ public class Plane implements Geometry{
     public Vector getNormal() {
         return normal;
     }
+
 }
