@@ -35,7 +35,7 @@ public class Cylinder extends Tube{
         else if (p == this.axisRay.getP0().add(this.axisRay.getV0().scale(height)))
             return this.axisRay.getV0().normalize();
         //find the distance between p0 to o
-        //TODO find the bag!! 
+        //TODO find the bag!!
         double t=this.axisRay.getV0().dotProduct(p.subtract(axisRay.getP0()));
 
         // if t = 0 is mean that on base 1
