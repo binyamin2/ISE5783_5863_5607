@@ -33,6 +33,5 @@ class SphereTest {
 
 
     }
-    //TODO check if radius positive
 
 }
