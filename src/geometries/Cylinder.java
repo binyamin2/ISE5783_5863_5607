@@ -29,13 +29,13 @@ public class Cylinder extends Tube{
     @Override
     public Vector getNormal(Point p) {
         // same point of the center base 1
-        if (p == this.axisRay.getP0())
+        if (p.equals(this.axisRay.getP0()))
             return this.axisRay.getV0().scale(-1).normalize();
         // same point of the center base 2
-        else if (p == this.axisRay.getP0().add(this.axisRay.getV0().scale(height)))
-            return this.axisRay.getV0().normalize();
+        else if (p.equals(this.axisRay.getP0().add(this.axisRay.getV0().scale(height))))
+            return this.axisRay.getV0();
+
         //find the distance between p0 to o
-        //TODO find the bag!!
         double t=this.axisRay.getV0().dotProduct(p.subtract(axisRay.getP0()));
 
         // if t = 0 is mean that on base 1
@@ -43,7 +43,7 @@ public class Cylinder extends Tube{
             return this.axisRay.getV0().scale(-1).normalize();
         // point on base 2
         else if (t == height)
-            return this.axisRay.getV0().normalize();
+            return this.axisRay.getV0();
         //point like tube on casing
         else if (t > 0 && t < this.height)
            return super.getNormal(p);
