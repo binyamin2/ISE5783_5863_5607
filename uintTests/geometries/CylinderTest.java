@@ -61,4 +61,7 @@ class CylinderTest {
                 cy.getNormal(new Point(0,h,0)),
                 "the normal is not correct in canter base 2");
     }
+    @Test
+    void testfindIntsersections() {
+    }
 }

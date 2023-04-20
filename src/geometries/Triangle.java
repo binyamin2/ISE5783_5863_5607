@@ -1,7 +1,10 @@
 package geometries;
 
 import primitives.Point;
+import primitives.Ray;
 import primitives.Vector;
+
+import java.util.List;
 
 /**
  * class of Triangle that extends Polygon
@@ -16,4 +19,8 @@ public class Triangle extends Polygon{
         super(vertices);
     }
 
+    @Override
+    public List<Point> findIntsersections(Ray ray) {
+        return super.findIntersections(ray);
+    }
 }

@@ -39,4 +39,21 @@ class TubeTest {
         assertEquals(vbvt.normalize(),tu.getNormal(pbvt),
                 "the normal is not correct when the point equivalent to base point");
     }
+    @Test
+    void testfindIntersections() {
+        // ============ Equivalence Partitions Tests ==============
+        //TC01 Ray intersects the tube from outside (2 points)
+        //TC02 Ray intersects the tube from inside (1 point)
+        //TC03 Ray not intersect the tube (0 points)
+        // =============== Boundary Values Tests ==================
+        //***start at the tube
+        //TC04 Ray start at the tube to inside (1 point)
+        //TC05 Ray start at the tube to outside (0 point)
+        //***ray equivalent to the tube ray
+        //TC06 inside the tube (0 point)
+        //TC07 outside the tube (0 point)
+        //TC08 on the tube (0 point)
+        //***ray tangent to tube
+        //TC09 ray tangent to tube
+    }
 }

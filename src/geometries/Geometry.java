@@ -6,7 +6,7 @@ import primitives.Vector;
 /**
  * interface for all the geometries
  */
-public interface Geometry {
+public interface Geometry extends Intersectable {
     /**
      * return the normal of the geometry from the point
      * @param p point on the geometry
