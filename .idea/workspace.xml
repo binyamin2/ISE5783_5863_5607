@@ -4,24 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="963acc02-6f7d-40d1-83cb-daf4b44206d2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/geometries/Intersectable.java" afterDir="false" />
+    <list default="true" id="963acc02-6f7d-40d1-83cb-daf4b44206d2" name="Changes" comment="unit test for sphere plane triangle polygon for find intersection">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/geometries/Cylinder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/Cylinder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/geometries/Geometry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/Geometry.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/geometries/Plane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/Plane.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/geometries/Polygon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/Polygon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/geometries/Sphere.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/Sphere.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/geometries/Triangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/Triangle.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/geometries/Tube.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/Tube.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/primitives/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/primitives/Point.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/uintTests/geometries/CylinderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/uintTests/geometries/CylinderTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uintTests/geometries/PlaneTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/uintTests/geometries/PlaneTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uintTests/geometries/PolygonTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/uintTests/geometries/PolygonTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uintTests/geometries/SphereTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/uintTests/geometries/SphereTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uintTests/geometries/TriangleTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/uintTests/geometries/TriangleTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/uintTests/geometries/TubeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/uintTests/geometries/TubeTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uintTests/primitives/PointTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/uintTests/primitives/PointTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -215,7 +202,8 @@
       <workItem from="1680166290857" duration="2853000" />
       <workItem from="1680609174989" duration="39000" />
       <workItem from="1681386210533" duration="3084000" />
-      <workItem from="1681832219823" duration="17121000" />
+      <workItem from="1681832219823" duration="17279000" />
+      <workItem from="1682322700533" duration="3717000" />
     </task>
     <task id="LOCAL‎-00001" summary="start">
       <created>1677000663387</created>
@@ -252,7 +240,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680609201821</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL‎-00006" summary="unit test for sphere plane triangle polygon for find intersection">
+      <created>1681988374058</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL‎-00006" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1681988374058</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -275,14 +270,15 @@
     <MESSAGE value="geometrisTest" />
     <MESSAGE value="finish testcases" />
     <MESSAGE value="cylender get normal not finsih" />
-    <option name="LAST_COMMIT_MESSAGE" value="cylender get normal not finsih" />
+    <MESSAGE value="unit test for sphere plane triangle polygon for find intersection" />
+    <option name="LAST_COMMIT_MESSAGE" value="unit test for sphere plane triangle polygon for find intersection" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/uintTests/geometries/CylinderTest.java</url>
-          <line>50</line>
+          <line>52</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -292,7 +288,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/uintTests/geometries/CylinderTest.java</url>
-          <line>12</line>
+          <line>14</line>
           <properties class="geometries.CylinderTest" method="testGetNormal">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />

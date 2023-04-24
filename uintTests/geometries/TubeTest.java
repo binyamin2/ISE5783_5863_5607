@@ -5,6 +5,8 @@ import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class TubeTest {
@@ -41,19 +43,82 @@ class TubeTest {
     }
     @Test
     void testfindIntersections() {
+        Tube tu=new Tube(1,new Ray(new Point(0,0,0),new Vector(0,0,1)));
         // ============ Equivalence Partitions Tests ==============
         //TC01 Ray intersects the tube from outside (2 points)
+        List<Point> result01=tu.findIntersections(
+                new Ray(new Point(0,-2,0.5),new Vector(0,4,0)));
+        assertEquals(
+                2,
+                result01.size(),
+                "wrong number of intersection");
+        result01=List.of(result01.get(0),result01.get(1));
+        Point p1=new Point(0,-1,0.5);
+        Point p2=new Point(0,1,0.5);
+        assertEquals(List.of(p1,p2),result01,"wrong point values");
+
         //TC02 Ray intersects the tube from inside (1 point)
+        List<Point> result02=tu.findIntersections(
+                new Ray(new Point(0,0,0.5),new Vector(0,2,0)));
+        assertEquals(
+                1,
+                result02.size(),
+                "wrong number of intersection");
+        result02=List.of(result02.get(0));
+        assertEquals(List.of(p2),result02,"wrong point values");
+
         //TC03 Ray not intersect the tube (0 points)
+        assertNull(tu.findIntersections(
+                new Ray(new Point(0,1.5,0.5),new Vector(0,2,0))),
+                "wrong number of intersections");
+
+
         // =============== Boundary Values Tests ==================
         //***start at the tube
         //TC04 Ray start at the tube to inside (1 point)
+        List<Point> result03=tu.findIntersections(
+                new Ray(new Point(0,-1,0.5),new Vector(0,2,0)));
+        assertEquals(
+                1,
+                result03.size(),
+                "wrong number of intersection");
+
         //TC05 Ray start at the tube to outside (0 point)
+        assertNull(tu.findIntersections(
+                        new Ray(new Point(0,1,0.5),new Vector(0,2,0))),
+                "wrong number of intersections");
+
+
         //***ray equivalent to the tube ray
         //TC06 inside the tube (0 point)
+        assertNull(tu.findIntersections(
+                        new Ray(new Point(0,0.5,0),new Vector(0,0,1))),
+                "wrong number of intersections");
+
         //TC07 outside the tube (0 point)
+        assertNull(tu.findIntersections(
+                        new Ray(new Point(2,0,0),new Vector(0,0,1))),
+                "wrong number of intersections");
+
         //TC08 on the tube (0 point)
+        assertNull(tu.findIntersections(
+                        new Ray(new Point(0,1,0),new Vector(0,0,1))),
+                "wrong number of intersections");
+
         //***ray tangent to tube
-        //TC09 ray tangent to tube
+        //TC09 ray start before tangent point(0 points)
+        assertNull(tu.findIntersections(
+                        new Ray(new Point(1,-2,0.5),new Vector(0,4,0))),
+                "wrong number of intersections");
+
+        //TC10 ray start on the tangent point(0 points)
+        assertNull(tu.findIntersections(
+                        new Ray(new Point(1,0,0.5),new Vector(0,4,0))),
+                "wrong number of intersections");
+
+        //TC11 ray start after the tangent point(0 points)
+        assertNull(tu.findIntersections(
+                        new Ray(new Point(1,1,0.5),new Vector(0,4,0))),
+                "wrong number of intersections");
     }
 }

@@ -5,6 +5,8 @@ import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class CylinderTest {
@@ -62,6 +64,57 @@ class CylinderTest {
                 "the normal is not correct in canter base 2");
     }
     @Test
-    void testfindIntsersections() {
+    void testfindIntersections() {
+        Ray p=new Ray(new Point(0,0,0),new Vector(0,0,1));
+        double h=4;
+        double r=1;
+        Cylinder cy = new Cylinder(r,p,h);
+
+        // ============ Equivalence Partitions Tests ==============
+        //*****equivalent to the main ray
+        //TC01 from outside the cylinder(2 points)
+        List<Point> result01=cy.findIntersections(
+                new Ray(new Point(0,0.5,-1),new Vector(0,0,4)));
+        assertEquals(
+                2,
+                result01.size(),
+                "wrong number of intersection");
+        result01=List.of(result01.get(0),result01.get(1));
+        Point p1=new Point(0,0.5,0);
+        Point p2=new Point(0,0.5,4);
+        assertEquals(List.of(p1,p2),result01,"wrong point values");
+
+        //TC02 from inside the cylinder(1 point)
+        List<Point> result02=cy.findIntersections(
+                new Ray(new Point(0,0.5,1),new Vector(0,0,4)));
+        assertEquals(
+                1,
+                result02.size(),
+                "wrong number of intersection");
+        result02=List.of(result01.get(0));
+        assertEquals(List.of(p2),result02,"wrong point values");
+
+        //TC03 from outside the cylinder(0 point)
+        assertNull(cy.findIntersections(new Ray(new Point(0,0,5),new Vector(0,0,1))),
+                "wrong number of intersection");
+
+        // =============== Boundary Values Tests ==================
+        //***on the plane base of the cylinder
+        //TC04 the ray is inside the plane
+        assertNull(cy.findIntersections(new Ray(new Point(-2,0,0),new Vector(2,0,0))),
+                "wrong number of intersection");
+
+        //TC05 the ray starts on the plane inside(1 point)
+        List<Point> result05=cy.findIntersections(
+                new Ray(new Point(0,0.5,0),new Vector(0,1,4)));
+        assertEquals(
+                1,
+                result05.size(),
+                "wrong number of intersection");
+
+        //TC05 the ray starts on the plane outside(0 point)
+        assertNull(cy.findIntersections(new Ray(new Point(0,0.5,0),new Vector(0,1,-1))),
+                "wrong number of intersection");
+
     }
 }
