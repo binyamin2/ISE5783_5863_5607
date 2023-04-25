@@ -10,7 +10,7 @@ class PointTest {
     @Test
     void testSubtract() {
         Point p1 = new Point(1,2,3);
-        Point p2 = new Point(3,3,4);
+        Point p2 = new Point(2,3,4);
 
         // ============ Equivalence Partitions Tests ==============
 
