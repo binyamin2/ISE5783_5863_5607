@@ -58,12 +58,12 @@ class PlaneTest {
         //*****Ray is parallel to the plane
         //TC01 the ray included in the plane
         assertNull(
-                plane.findIntersections(new Ray (new Point(0,0,-1),new Vector(1,1,0))),
+                plane.findIntersections(new Ray (new Point(0,1,0),new Vector(1,1,0))),
                 "wrong number of intersection");
 
         //TC02 the ray not included in the plane
         assertNull(
-                plane.findIntersections(new Ray (new Point(0,0,0),new Vector(1,0,-1))),
+                plane.findIntersections(new Ray (new Point(0,0,-1),new Vector(1,1,0))),
                 "wrong number of intersection");
 
 
