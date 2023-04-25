@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="963acc02-6f7d-40d1-83cb-daf4b44206d2" name="Changes" comment="unit test for sphere plane triangle polygon for find intersection">
+    <list default="true" id="963acc02-6f7d-40d1-83cb-daf4b44206d2" name="Changes" comment="unit test for tube and cylinder">
+      <change afterPath="$PROJECT_DIR$/src/geometries/Geometries.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uintTests/geometries/GeometriesTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/geometries/Tube.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/Tube.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uintTests/geometries/CylinderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/uintTests/geometries/CylinderTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uintTests/geometries/TubeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/uintTests/geometries/TubeTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/geometries/Cylinder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/Cylinder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/geometries/Sphere.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/Sphere.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/geometries/Triangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/Triangle.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,9 +20,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
         <option value="JUnit5 Test Class" />
-        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -35,12 +37,6 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="PUSH_TAGS">
-      <GitPushTagMode>
-        <option name="argument" value="--tags" />
-        <option name="title" value="All" />
-      </GitPushTagMode>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -203,7 +199,8 @@
       <workItem from="1680609174989" duration="39000" />
       <workItem from="1681386210533" duration="3084000" />
       <workItem from="1681832219823" duration="17279000" />
-      <workItem from="1682322700533" duration="3717000" />
+      <workItem from="1682322700533" duration="3878000" />
+      <workItem from="1682412685086" duration="4686000" />
     </task>
     <task id="LOCAL‎-00001" summary="start">
       <created>1677000663387</created>
@@ -247,7 +244,14 @@
       <option name="project" value="LOCAL‎" />
       <updated>1681988374058</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL‎-00007" summary="unit test for tube and cylinder">
+      <created>1682326600556</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL‎-00007" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1682326600556</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -271,7 +275,8 @@
     <MESSAGE value="finish testcases" />
     <MESSAGE value="cylender get normal not finsih" />
     <MESSAGE value="unit test for sphere plane triangle polygon for find intersection" />
-    <option name="LAST_COMMIT_MESSAGE" value="unit test for sphere plane triangle polygon for find intersection" />
+    <MESSAGE value="unit test for tube and cylinder" />
+    <option name="LAST_COMMIT_MESSAGE" value="unit test for tube and cylinder" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

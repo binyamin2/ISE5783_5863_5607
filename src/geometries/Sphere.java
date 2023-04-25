@@ -3,7 +3,7 @@ package geometries;
 import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
-
+import static primitives.Util.*;
 import java.util.List;
 
 /**
@@ -18,7 +18,7 @@ public class Sphere extends RadialGeometry{
      * @param radius
      * @param center
      */
-    public Sphere(Double radius, Point center) {
+    public Sphere(double radius, Point center) {
         super(radius);
         this.center = center;
 
@@ -40,6 +40,10 @@ public class Sphere extends RadialGeometry{
 
     @Override
     public List<Point> findIntersections(Ray ray) {
-        return null;
+        Vector u=center.subtract(ray.getP0());
+        double tm=alignZero(ray.getV0().dotProduct(u));
+        double d=Math.sqrt(u.lengthSquared()-tm*tm);
+        if (d>=radius)
+            return null;
     }
 }
