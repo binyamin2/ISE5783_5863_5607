@@ -83,6 +83,62 @@ public class Polygon implements Geometry {
 
     @Override
     public List<Point> findIntersections(Ray ray) {
-        return null;
+        Point[] vertices = this.vertices.toArray(new Point[0]);
+
+        // Check if ray intersects the plane containing the polygon
+        Vector normal = this.plane.getNormal();
+        double denominator = normal.dotProduct(ray.getV0());
+        if (isZero(denominator)) {
+            return null; // Ray is parallel to the polygon
+        }
+        if(ray.getP0().equals(vertices[0]))
+            return null;
+        double numerator = normal.dotProduct(vertices[0].subtract(ray.getP0()));
+        double t = numerator / denominator;
+
+        // Check if intersection point is behind the ray's origin
+        if (t < 0) {
+            return null;
+        }
+
+        Point intersectionPoint = ray.getP0().add(ray.getV0().scale(t));
+
+        // Check if intersection point is inside the polygon
+        int n = vertices.length;
+        for (int i = 0; i < n; i++) {
+            Point p1 = vertices[i];
+            Point p2 = vertices[(i + 1) % n];
+            Point p3 = vertices[(i + 2) % n];
+
+            // Calculate barycentric coordinates for triangle formed by p1, p2, and p3
+            Vector v1 = p2.subtract(p1);
+            Vector v2 = p3.subtract(p1);
+            Vector v3 = intersectionPoint.subtract(p1);
+
+            double dot11 = v1.dotProduct(v1);
+            double dot12 = v1.dotProduct(v2);
+            double dot13 = v1.dotProduct(v3);
+            double dot22 = v2.dotProduct(v2);
+            double dot23 = v2.dotProduct(v3);
+
+            double invDenom = 1.0 / (dot11 * dot22 - dot12 * dot12);
+            double u = (dot22 * dot13 - dot12 * dot23) * invDenom;
+            double v = (dot11 * dot23 - dot12 * dot13) * invDenom;
+
+            // Check if intersection point is inside the triangle
+            if (u >= 0 && v >= 0 && u + v <= 1) {
+                // Check if intersection point is on an edge or vertex
+                if (isZero(u) || isZero(v) || isZero(u + v - 1)) {
+                    return null;
+                } else {
+                    return List.of(intersectionPoint);
+                }
+            }
+        }
+        return null; // Intersection point is outside the polygon
     }
+
+
+
+
 }

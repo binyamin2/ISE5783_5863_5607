@@ -95,7 +95,7 @@ public class PolygonTests {
               new Ray(new Point(0.25,0.25,1),new Vector(0,0,-1)));
       assertEquals(
               1,
-              result01.get(0),
+              result01.size(),
               "wrong number of intersection");
       result01=List.of(result01.get(0));
       assertEquals(
