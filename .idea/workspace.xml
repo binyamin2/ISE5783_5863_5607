@@ -4,17 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="963acc02-6f7d-40d1-83cb-daf4b44206d2" name="Changes" comment="implement geometries">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_04_2023_18_25_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_04_2023_18_25__Changes_.xml" beforeDir="false" />
+    <list default="true" id="963acc02-6f7d-40d1-83cb-daf4b44206d2" name="Changes" comment="implement geometries poligon and triangle">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/geometries/Plane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/Plane.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/geometries/Polygon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/Polygon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/geometries/Triangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/Triangle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/geometries/Cylinder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/Cylinder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/geometries/Tube.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/Tube.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uintTests/geometries/PolygonTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/uintTests/geometries/PolygonTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uintTests/geometries/TriangleTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/uintTests/geometries/TriangleTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uintTests/geometries/TubeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/uintTests/geometries/TubeTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,7 +95,23 @@
       <recent name="primitives" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.TubeTest.testfindIntersections">
+  <component name="RunManager" selected="JUnit.CylinderTest.testfindIntersections">
+    <configuration name="CylinderTest.testfindIntersections" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ISE5783_5863_5607" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="geometries.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="geometries" />
+      <option name="MAIN_CLASS_NAME" value="geometries.CylinderTest" />
+      <option name="METHOD_NAME" value="testfindIntersections" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="PlaneTest.testGetNormal" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ISE5783_5863_5607" />
       <extension name="coverage">
@@ -114,22 +123,6 @@
       <option name="PACKAGE_NAME" value="geometries" />
       <option name="MAIN_CLASS_NAME" value="geometries.PlaneTest" />
       <option name="METHOD_NAME" value="testGetNormal" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="PlaneTest.testfindIntersections" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ISE5783_5863_5607" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="geometries.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="geometries" />
-      <option name="MAIN_CLASS_NAME" value="geometries.PlaneTest" />
-      <option name="METHOD_NAME" value="testfindIntersections" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -185,11 +178,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.CylinderTest.testfindIntersections" />
         <item itemvalue="JUnit.TubeTest.testfindIntersections" />
         <item itemvalue="JUnit.PolygonTests.testfindIntersections" />
         <item itemvalue="JUnit.PlaneTest.testGetNormal" />
         <item itemvalue="JUnit.TriangleTest.testfindIntersections" />
-        <item itemvalue="JUnit.PlaneTest.testfindIntersections" />
       </list>
     </recent_temporary>
   </component>
@@ -217,6 +210,7 @@
       <workItem from="1681832219823" duration="17279000" />
       <workItem from="1682322700533" duration="3878000" />
       <workItem from="1682412685086" duration="9844000" />
+      <workItem from="1682841823963" duration="12667000" />
     </task>
     <task id="LOCAL‎-00001" summary="start">
       <created>1677000663387</created>
@@ -274,7 +268,21 @@
       <option name="project" value="LOCAL‎" />
       <updated>1682417464429</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL‎-00009" summary="implement geometries poligon and triangle">
+      <created>1682592942182</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL‎-00009" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1682592942182</updated>
+    </task>
+    <task id="LOCAL‎-00010" summary="implement geometries poligon and triangle">
+      <created>1682592960609</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL‎-00010" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1682592960609</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -300,7 +308,8 @@
     <MESSAGE value="unit test for sphere plane triangle polygon for find intersection" />
     <MESSAGE value="unit test for tube and cylinder" />
     <MESSAGE value="unit test for tube and geometries" />
-    <option name="LAST_COMMIT_MESSAGE" value="unit test for tube and geometries" />
+    <MESSAGE value="implement geometries poligon and triangle" />
+    <option name="LAST_COMMIT_MESSAGE" value="implement geometries poligon and triangle" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -312,7 +321,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/geometries/Cylinder.java</url>
-          <line>32</line>
+          <line>35</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -322,8 +331,18 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/uintTests/geometries/TubeTest.java</url>
-          <line>48</line>
-          <option name="timeStamp" value="18" />
+          <line>93</line>
+          <option name="timeStamp" value="24" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/uintTests/geometries/TubeTest.java</url>
+          <line>114</line>
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/uintTests/geometries/CylinderTest.java</url>
+          <line>75</line>
+          <option name="timeStamp" value="27" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/uintTests/geometries/CylinderTest.java</url>
