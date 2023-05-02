@@ -36,7 +36,7 @@ public class Cylinder extends Tube{
         if (p.equals(this.axisRay.getP0()))
             return this.axisRay.getV0().scale(-1).normalize();
         // same point of the center base 2
-        else if (p.equals(this.axisRay.getP0().add(this.axisRay.getV0().scale(height))))
+        else if (p.equals(this.axisRay.getPoint(height)))
             return this.axisRay.getV0();
 
         //find the distance between p0 to o
@@ -76,7 +76,7 @@ public class Cylinder extends Tube{
         List<Point> endIntersections = new ArrayList<>();
         double t1 = (height / 2.0 - p0.subtract(ray.getP0()).dotProduct(v)) / ray.getV0().dotProduct(v);
         if (t1 > 0) {
-            Point intersection1 = ray.getP0().add(ray.getV0().scale(t1));
+            Point intersection1 = ray.getPoint(t1);
             if (intersection1.subtract(center).lengthSquared() <= radius * radius) {
                 endIntersections.add(intersection1);
             }
@@ -84,7 +84,7 @@ public class Cylinder extends Tube{
 
         double t2 = (-height / 2.0 - p0.subtract(ray.getP0()).dotProduct(v)) / ray.getV0().dotProduct(v);
         if (t2 > 0) {
-            Point intersection2 = ray.getP0().add(ray.getV0().scale(t2));
+            Point intersection2 = ray.getPoint(t2);
             if (intersection2.subtract(center).lengthSquared() <= radius * radius) {
                 endIntersections.add(intersection2);
             }

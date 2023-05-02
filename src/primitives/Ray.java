@@ -50,4 +50,8 @@ public class Ray {
                 ", v0=" + v0 +
                 '}';
     }
+    public Point getPoint(double t)
+    {
+        return this.getP0().add(this.getV0().scale(t));
+    }
 }

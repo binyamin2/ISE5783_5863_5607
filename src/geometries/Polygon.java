@@ -101,7 +101,7 @@ public class Polygon implements Geometry {
             return null;
         }
 
-        Point intersectionPoint = ray.getP0().add(ray.getV0().scale(t));
+        Point intersectionPoint = ray.getPoint(t);
 
         // Check if intersection point is inside the polygon
         int n = vertices.length;
@@ -132,8 +132,7 @@ public class Polygon implements Geometry {
                     return null;
                 } else {
                     return List.of(intersectionPoint);
-                }
-            }
+                }}
         }
         return null; // Intersection point is outside the polygon
     }

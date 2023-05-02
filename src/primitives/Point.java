@@ -99,4 +99,7 @@ public class Point {
     public double getZ() {
         return xyz.d3;
     }
+
+
 }
+
