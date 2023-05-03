@@ -57,6 +57,33 @@ public class Cylinder extends Tube{
 
     @Override
     public List<Point> findIntersections(Ray ray) {
+        Point center=this.getCenter();
+        // Check if the ray is equivalent to the axis ray of the cylinder
+        if (ray.getV0().normalize().dotProduct(getAxisRay().getV0().normalize()) == 1 ||
+                ray.getV0().normalize().dotProduct(getAxisRay().getV0().normalize()) == -1) {
+            List<Point> intersections = new ArrayList<>();
+
+            // Calculate the intersection of the ray with the planes that define the top and bottom ends of the cylinder
+            double t1 = (height / 2.0 - (ray.getP0().subtract(getAxisRay().getP0())).dotProduct(getAxisRay().getV0().normalize())) / ray.getV0().dotProduct(getAxisRay().getV0().normalize());
+            double t2 = (-height / 2.0 - (ray.getP0().subtract(getAxisRay().getP0())).dotProduct(getAxisRay().getV0().normalize())) / ray.getV0().dotProduct(getAxisRay().getV0().normalize());
+
+            // Check if the intersection points are within the cylinder's radius
+            Point intersection1 = ray.getPoint(t1);
+            if (intersection1.subtract(center).lengthSquared() <= radius * radius) {
+                intersections.add(intersection1);
+            }
+            Point intersection2 = ray.getPoint(t2);
+            if (intersection2.subtract(center).lengthSquared() <= radius * radius) {
+                intersections.add(intersection2);
+            }
+
+            if (intersections.isEmpty()) {
+                return null;
+            }
+
+            return intersections;
+        }
+
         // Get the intersections with the tube
         List<Point> intersections = super.findIntersections(ray);
 
@@ -68,15 +95,11 @@ public class Cylinder extends Tube{
         // Calculate the intersection points with the ends of the cylinder
         Point p0 = getAxisRay().getP0();
         Vector v = getAxisRay().getV0().normalize();
-        Point center1 = p0.add(v.scale(height/2.0));
-        Point center2 = p0.subtract(v.scale(height/2.0));
-        Point center = new Point((center1.getX()+center2.getX())*0.5,(center1.getY()+center2.getY())*0.5,(center1.getZ()+center2.getZ())*0.5);
-
 
         List<Point> endIntersections = new ArrayList<>();
         double t1 = (height / 2.0 - p0.subtract(ray.getP0()).dotProduct(v)) / ray.getV0().dotProduct(v);
         if (t1 > 0) {
-            Point intersection1 = ray.getPoint(t1);
+            Point intersection1 = ray.getP0().add(ray.getV0().scale(t1));
             if (intersection1.subtract(center).lengthSquared() <= radius * radius) {
                 endIntersections.add(intersection1);
             }
@@ -84,7 +107,7 @@ public class Cylinder extends Tube{
 
         double t2 = (-height / 2.0 - p0.subtract(ray.getP0()).dotProduct(v)) / ray.getV0().dotProduct(v);
         if (t2 > 0) {
-            Point intersection2 = ray.getPoint(t2);
+            Point intersection2 = ray.getP0().add(ray.getV0().scale(t2));
             if (intersection2.subtract(center).lengthSquared() <= radius * radius) {
                 endIntersections.add(intersection2);
             }
@@ -103,6 +126,10 @@ public class Cylinder extends Tube{
         // Merge the intersection points from the tube and the ends of the cylinder
         intersections.addAll(endIntersections);
         return intersections;
+    }
+
+    public Point getCenter() {
+        return getAxisRay().getP0().add(getAxisRay().getV0().scale(height / 2.0));
     }
 }
 
