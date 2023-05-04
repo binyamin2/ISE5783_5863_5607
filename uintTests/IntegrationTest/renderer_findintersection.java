@@ -105,13 +105,15 @@ public class renderer_findintersection {
      * @return number of intersection
      */
     int countIntersection(Camera ca, Intersectable body,int nX,int nY){
-        List<Point> res= new ArrayList<>() ;
+        int sum=0;
         for (int i=0;i<nX;i++){
             for (int j=0;j<nX;j++){
-                res.addAll(body.findIntersections(ca.constructRay(nX,nY,j,i)));
+                List<Point> res=body.findIntersections(ca.constructRay(nX,nY,j,i));
+                if (res!=null)
+                    sum+=res.size();
             }
         }
-        return res.size();
+        return sum;
 
     }
 }

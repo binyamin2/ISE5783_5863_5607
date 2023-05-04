@@ -6,6 +6,9 @@ import primitives.Vector;
 
 import static primitives.Util.*;
 
+/**
+ * class for camera represent a camera with details on view plane
+ */
 public class Camera {
     private Point location;
     private Vector vright;
@@ -62,7 +65,20 @@ public class Camera {
      * @return ray
      */
     public Ray constructRay(int nX, int nY, int j, int i) {
-        return null;
+        //calculate the center of the excepted pixel with the given formula
+        Point pc=this.location.add(vto.scale(distance));
+        if (nY==0 && nX==0)
+            throw new IllegalArgumentException("divided by zero");
+        double ry=height/nY;
+        double rx=width/nX;
+        double xj=(j-(nX-1.0)/2.0)*rx;
+        double yi=-(i-(nY-1.0)/2.0)*ry;
+        Point pij=pc;
+        if (xj!=0)
+            pij=pij.add(vright.scale(xj));
+        if (yi!=0)
+            pij=pij.add(vup.scale(yi));
+        return new Ray(location,pij.subtract(location));
     }
 
 

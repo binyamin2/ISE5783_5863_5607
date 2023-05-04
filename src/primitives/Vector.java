@@ -1,5 +1,8 @@
 package primitives;
 
+/**
+ * Vector class represent by 3 doubles
+ */
 public class Vector extends Point{
 
     /**
