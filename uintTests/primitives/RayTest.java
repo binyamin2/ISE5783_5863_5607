@@ -44,7 +44,7 @@ class RayTest {
         Ray r20 = new Ray(new Point(0.25, 0.25, -4), new Vector(0, 0, 1));
 
         assertEquals(new Point(0.25, 0.25, -3),
-                geo20.findIntersections(r20),
+                r20.findClosetPoint(geo20.findIntersections(r20)),
                 error);
 
         //TC30 The closet point is the first point
@@ -58,7 +58,7 @@ class RayTest {
         Ray r30 = new Ray(new Point(0.25, 0.25, -4), new Vector(0, 0, 1));
 
         assertEquals(new Point(0.25, 0.25, -3),
-                geo30.findIntersections(r30),
+                r30.findClosetPoint(geo30.findIntersections(r30)),
                 error);
     }
 }

@@ -4,16 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="963acc02-6f7d-40d1-83cb-daf4b44206d2" name="Changes" comment="start camera class&#10;integration test&#10;camera test">
-      <change afterPath="$PROJECT_DIR$/src/lighting/AmbientLight.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/primitives/Color.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/renderer/ImageWriter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/scene/Scene.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/uintTests/primitives/RayTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/uintTests/renderer/ImageWriterTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/primitives/Ray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/primitives/Ray.java" afterDir="false" />
+    <list default="true" id="963acc02-6f7d-40d1-83cb-daf4b44206d2" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/uintTests/primitives/RayTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/uintTests/primitives/RayTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -300,7 +292,14 @@
       <option name="project" value="LOCAL‎" />
       <updated>1683116687121</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Add Color, ImageWriter, findClosetPoint to ray">
+      <created>1683720932617</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1683720932617</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -328,7 +327,8 @@
     <MESSAGE value="unit test for tube and geometries" />
     <MESSAGE value="implement geometries poligon and triangle" />
     <MESSAGE value="start camera class&#10;integration test&#10;camera test" />
-    <option name="LAST_COMMIT_MESSAGE" value="start camera class&#10;integration test&#10;camera test" />
+    <MESSAGE value="Add Color, ImageWriter, findClosetPoint to ray" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add Color, ImageWriter, findClosetPoint to ray" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
