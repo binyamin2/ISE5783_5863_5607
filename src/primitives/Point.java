@@ -4,6 +4,8 @@ package primitives;
  * class to represent a point
  */
 public class Point {
+    //zero point
+    public static final Point ZERO =new Point(0,0,0) ;
     final Double3  xyz;
 
     /**

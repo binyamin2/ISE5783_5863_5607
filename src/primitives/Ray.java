@@ -11,6 +11,7 @@ public class Ray {
 
     /**
      * constructor
+     *
      * @param p0 Point
      * @param v0 Vector
      */
@@ -52,18 +53,33 @@ public class Ray {
                 ", v0=" + v0 +
                 '}';
     }
-    public Point getPoint(double t)
-    {
+
+    public Point getPoint(double t) {
         return this.getP0().add(this.getV0().scale(t));
     }
 
     /**
      * Return the closest point to the start of the ray
+     *
      * @param list
      * @return Point
      */
-    public Point findClosetPoint(List<Point> list){
-        return null;
+    public Point findClosetPoint(List<Point> list) {
+        //return null if empty list
+        if (list.isEmpty())
+            return null;
+        double currdis = 0;
+        double minDis = Double.POSITIVE_INFINITY;
+        Point minPoint = new Point(0, 0, 0);
+        //find the point with the smallest distance from p0
+        for (Point p : list) {
+            currdis = this.getP0().distance(p);
+            if (currdis < minDis) {
+                minPoint = p;
+                minDis = currdis;
+            }
+        }
+        return minPoint;
     }
 
 }

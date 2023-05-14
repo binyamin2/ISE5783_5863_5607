@@ -35,7 +35,9 @@ public class Geometries implements Intersectable {
                     list.addAll(intersections);
                 }
             }
-
+            if(list.isEmpty()){
+                return null;
+            }
             return List.of(list.toArray(new Point[0]));
         }
     }
