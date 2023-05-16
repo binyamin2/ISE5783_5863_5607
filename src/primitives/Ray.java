@@ -66,7 +66,7 @@ public class Ray {
      */
     public Point findClosetPoint(List<Point> list) {
         //return null if empty list
-        if (list.isEmpty())
+        if (list == null)
             return null;
         double currdis = 0;
         double minDis = Double.POSITIVE_INFINITY;
