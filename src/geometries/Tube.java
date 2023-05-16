@@ -134,7 +134,7 @@ public class Tube extends RadialGeometry {
                 }
             }
 
-            return intersections.isEmpty() ? null : List.of(intersections.toArray(new Point[0]));
+            return intersections.isEmpty() ? null : intersections;
         }
     }
 

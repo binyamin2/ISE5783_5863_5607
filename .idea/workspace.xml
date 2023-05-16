@@ -4,9 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="963acc02-6f7d-40d1-83cb-daf4b44206d2" name="Changes" comment="">
+    <list default="true" id="963acc02-6f7d-40d1-83cb-daf4b44206d2" name="Changes" comment="finish stage 5">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/geometries/Geometries.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/Geometries.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/geometries/Polygon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/Polygon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/geometries/Tube.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/Tube.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/primitives/Ray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/primitives/Ray.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/renderer/Camera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/Camera.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uintTests/renderer/ImageWriterTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/uintTests/renderer/ImageWriterTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -212,6 +217,7 @@
       <workItem from="1683107743063" duration="8965000" />
       <workItem from="1683186942468" duration="4143000" />
       <workItem from="1684050619515" duration="13816000" />
+      <workItem from="1684246568886" duration="3949000" />
     </task>
     <task id="LOCAL‎-00001" summary="start">
       <created>1677000663387</created>
@@ -378,7 +384,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/renderer/Camera.java</url>
-          <line>142</line>
+          <line>145</line>
           <option name="timeStamp" value="52" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">

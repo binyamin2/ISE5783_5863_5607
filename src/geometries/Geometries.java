@@ -7,38 +7,38 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Geometries implements Intersectable {
-    List <Intersectable> intersectables;
+    List <Intersectable> geometries;
 
     public Geometries() {
-        this.intersectables = new LinkedList<Intersectable>();
+        this.geometries = new LinkedList<Intersectable>();
     }
     public Geometries (Intersectable... geometries ){
-        this.intersectables = new LinkedList<Intersectable>(List.of(geometries));
+        this.geometries = new LinkedList<Intersectable>(List.of(geometries));
     }
 
     public void add (Intersectable... geometries ){
-        intersectables.addAll(List.of(geometries));
+        this.geometries.addAll(List.of(geometries));
     }
 
     @Override
     public List<Point> findIntersections(Ray ray) {
 
-        if (intersectables.size() == 0)
+        if (geometries.size() == 0)
             return null;
         else{
-            List<Point> list = new LinkedList<Point>();
+            List<Point> result = new LinkedList<Point>();
 
-            for (Intersectable var : intersectables)
+            for (Intersectable geometry : geometries)
             {
-                List<Point> intersections = var.findIntersections(ray);
+                List<Point> intersections = geometry.findIntersections(ray);
                 if (intersections != null) {
-                    list.addAll(intersections);
+                    result.addAll(intersections);
                 }
             }
-            if(list.isEmpty()){
+            if(result.isEmpty()){
                 return null;
             }
-            return List.of(list.toArray(new Point[0]));
+            return result;
         }
     }
 }

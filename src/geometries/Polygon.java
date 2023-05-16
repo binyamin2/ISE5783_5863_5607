@@ -83,23 +83,17 @@ public class Polygon implements Geometry {
 
     @Override
     public List<Point> findIntersections(Ray ray) {
-        Point[] vertices = this.vertices.toArray(new Point[0]);
-
         // Check if ray intersects the plane containing the polygon
+        List<Point> intersections = plane.findIntersections(ray);
+        if (intersections == null){
+            return  null;
+        }
+
+        Point[] vertices = this.vertices.toArray(new Point[0]);
         Vector normal = this.plane.getNormal();
         double denominator = normal.dotProduct(ray.getV0());
-        if (isZero(denominator)) {
-            return null; // Ray is parallel to the polygon
-        }
-        if(ray.getP0().equals(vertices[0]))
-            return null;
         double numerator = normal.dotProduct(vertices[0].subtract(ray.getP0()));
         double t = numerator / denominator;
-
-        // Check if intersection point is behind the ray's origin
-        if (t < 0) {
-            return null;
-        }
 
         Point intersectionPoint = ray.getPoint(t);
 
@@ -131,7 +125,7 @@ public class Polygon implements Geometry {
                 if (isZero(u) || isZero(v) || isZero(u + v - 1)) {
                     return null;
                 } else {
-                    return List.of(intersectionPoint);
+                    return intersections;
                 }}
         }
         return null; // Intersection point is outside the polygon

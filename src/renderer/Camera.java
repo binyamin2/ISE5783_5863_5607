@@ -20,8 +20,8 @@ public class Camera {
     private double height;
     private double width;
     private double distance;
-    private ImageWriter iw;
-    private RayTracerBase rtb;
+    private ImageWriter imageWriter;
+    private RayTracerBase rayTracer;
 
 
 
@@ -46,7 +46,7 @@ public class Camera {
      * @return camera
      */
     public Camera setImageWriter(ImageWriter iw) {
-        this.iw = iw;
+        this.imageWriter = iw;
         return this;
     }
 
@@ -56,7 +56,7 @@ public class Camera {
      * @return camera
      */
     public Camera setRayTracer(RayTracerBase rtb) {
-        this.rtb = rtb;
+        this.rayTracer = rtb;
         return this;
     }
 
@@ -100,9 +100,9 @@ public class Camera {
         double xj=(j-(nX-1.0)/2.0)*rx;
         double yi=-(i-(nY-1.0)/2.0)*ry;
         Point pij=pc;
-        if (xj!=0)
+        if (! isZero(xj))
             pij=pij.add(vright.scale(xj));
-        if (yi!=0)
+        if (! isZero(yi))
             pij=pij.add(vup.scale(yi));
         return new Ray(location,pij.subtract(location));
     }
@@ -132,15 +132,19 @@ public class Camera {
         if (Double.isNaN(distance)) {
             throw new MissingResourceException("distance is missing or NaN", "double", "distance");
         }
-        if (iw == null) {
+        if (imageWriter == null) {
             throw new MissingResourceException("iw is missing", "ImageWriter", "iw");
         }
-        if (rtb == null) {
+        if (rayTracer == null) {
             throw new MissingResourceException("rtb is missing", "RayTracerBase", "rtb");
         }
-        for (int x = 0 ; x < iw.getNx(); x++ ){
-            for (int y = 0 ; y < iw.getNy(); y++ ){
-                this.iw.writePixel(x,y,this.castRay(iw.getNx(),iw.getNy(),x,y));
+        int nx = imageWriter.getNx();
+        int ny = imageWriter.getNy();
+
+        for (int x = 0; x < nx; x++ ){
+            for (int y = 0; y < ny; y++ ){
+                Color color = this.castRay(nx, ny, x, y);
+                this.imageWriter.writePixel(x,y, color);
             }
         }
     }
@@ -153,8 +157,9 @@ public class Camera {
      *@param y number of the specific row pixel
      * @return
      */
-    public Color castRay(int nx, int ny, int x, int y) {
-        return rtb.traceRay(this.constructRay(nx,ny,x,y));
+    private Color castRay(int nx, int ny, int x, int y) {
+        Ray ray = this.constructRay(nx, ny, x, y);
+        return rayTracer.traceRay(ray);
     }
 
     /**
@@ -163,14 +168,14 @@ public class Camera {
      * @param color
      */
     public void printGrid (int interval , Color color){
-        if (this.iw==null){
+        if (this.imageWriter ==null){
             throw new MissingResourceException("iw is missing", "ImageWriter", "iw");
         }
-        for (int x = 0 ; x < iw.getNx(); x++ ){
-            for (int y = 0 ; y < iw.getNy(); y++ ){
+        for (int x = 0; x < imageWriter.getNx(); x++ ){
+            for (int y = 0; y < imageWriter.getNy(); y++ ){
 
                 if (x % interval == 0 || y % interval ==0)
-                    iw.writePixel(x,y,color);
+                    imageWriter.writePixel(x,y,color);
 
             }
         }
@@ -180,10 +185,10 @@ public class Camera {
      * write the data to image
      */
     public void writeToImage(){
-        if (this.iw==null){
+        if (this.imageWriter ==null){
             throw new MissingResourceException("iw is missing", "ImageWriter", "iw");
         }
-        iw.writeToImage();
+        imageWriter.writeToImage();
     }
 
     public Point getLocation() {

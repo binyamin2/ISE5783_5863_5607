@@ -61,19 +61,19 @@ public class Ray {
     /**
      * Return the closest point to the start of the ray
      *
-     * @param list
+     * @param points
      * @return Point
      */
-    public Point findClosetPoint(List<Point> list) {
+    public Point findClosetPoint(List<Point> points) {
         //return null if empty list
-        if (list == null)
+        if (points == null)
             return null;
         double currdis = 0;
         double minDis = Double.POSITIVE_INFINITY;
         Point minPoint = new Point(0, 0, 0);
         //find the point with the smallest distance from p0
-        for (Point p : list) {
-            currdis = this.getP0().distance(p);
+        for (Point p : points) {
+            currdis = this.getP0().distanceSquared(p);
             if (currdis < minDis) {
                 minPoint = p;
                 minDis = currdis;
