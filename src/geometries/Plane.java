@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * class of plane
  */
-public class Plane implements Geometry{
+public class Plane extends Geometry{
 
     final Point q0;
     final Vector normal;
@@ -52,7 +52,7 @@ public class Plane implements Geometry{
 
 
     @Override
-    public List<Point> findIntersections(Ray ray) {
+    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
         double nv = normal.dotProduct(ray.getV0());
         //if not verticals
         if (!isZero(nv)){
@@ -61,7 +61,7 @@ public class Plane implements Geometry{
                 return null;
             double t = alignZero(normal.dotProduct(q0.subtract(ray.getP0()))/ nv);
             if(t>0)
-                return List.of(ray.getPoint(t));
+                return List.of(new GeoPoint(this, ray.getPoint(t)));
         }
         return null;
     }

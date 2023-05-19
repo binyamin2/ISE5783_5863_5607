@@ -11,7 +11,7 @@ import primitives.Vector;
 /** Polygon class represents two-dimensional polygon in 3D Cartesian coordinate
  * system
  * @author Dan */
-public class Polygon implements Geometry {
+public class Polygon extends Geometry {
     /** List of polygon's vertices */
     protected final List<Point> vertices;
     /** Associated plane in which the polygon lays */
@@ -82,20 +82,20 @@ public class Polygon implements Geometry {
     public Vector getNormal(Point point) { return plane.getNormal(); }
 
     @Override
-    public List<Point> findIntersections(Ray ray) {
+    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
         // Check if ray intersects the plane containing the polygon
-        List<Point> intersections = plane.findIntersections(ray);
+        List<GeoPoint> intersections = plane.findGeoIntersectionsHelper(ray);
         if (intersections == null){
             return  null;
         }
 
         Point[] vertices = this.vertices.toArray(new Point[0]);
-        Vector normal = this.plane.getNormal();
-        double denominator = normal.dotProduct(ray.getV0());
-        double numerator = normal.dotProduct(vertices[0].subtract(ray.getP0()));
-        double t = numerator / denominator;
+//        Vector normal = this.plane.getNormal();
+//        double denominator = normal.dotProduct(ray.getV0());
+//        double numerator = normal.dotProduct(vertices[0].subtract(ray.getP0()));
+//        double t = numerator / denominator;
 
-        Point intersectionPoint = ray.getPoint(t);
+        Point intersectionPoint = intersections.get(0).point;
 
         // Check if intersection point is inside the polygon
         int n = vertices.length;

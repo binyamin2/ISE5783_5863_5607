@@ -1,6 +1,8 @@
 package primitives;
 
 import java.util.List;
+import geometries.Intersectable.GeoPoint;
+
 
 /**
  * class to represent a ray
@@ -58,28 +60,38 @@ public class Ray {
         return this.getP0().add(this.getV0().scale(t));
     }
 
+
+    /**
+     * Return the closest point to the start of the ray
+     * @param intersections
+     * @return
+     */
+    public GeoPoint findClosestGeoPoint(List<GeoPoint> intersections) {
+        //return null if empty list
+        if (intersections == null)
+            return null;
+        double currdis = 0;
+        double minDis = Double.POSITIVE_INFINITY;
+        GeoPoint minPoint = new GeoPoint(null, new Point(0, 0, 0));
+        //find the point with the smallest distance from p0
+        for (GeoPoint geo : intersections) {
+            currdis = this.getP0().distanceSquared(geo.point);
+            if (currdis < minDis) {
+                minPoint = geo;
+                minDis = currdis;
+            }
+        }
+        return minPoint;
+
+    }
     /**
      * Return the closest point to the start of the ray
      *
      * @param points
      * @return Point
      */
-    public Point findClosetPoint(List<Point> points) {
-        //return null if empty list
-        if (points == null)
-            return null;
-        double currdis = 0;
-        double minDis = Double.POSITIVE_INFINITY;
-        Point minPoint = new Point(0, 0, 0);
-        //find the point with the smallest distance from p0
-        for (Point p : points) {
-            currdis = this.getP0().distanceSquared(p);
-            if (currdis < minDis) {
-                minPoint = p;
-                minDis = currdis;
-            }
-        }
-        return minPoint;
+    public Point findClosestPoint(List<Point> points) {
+        return points == null || points.isEmpty() ? null
+                : findClosestGeoPoint(points.stream().map(p -> new GeoPoint(null, p)).toList()).point;
     }
-
 }

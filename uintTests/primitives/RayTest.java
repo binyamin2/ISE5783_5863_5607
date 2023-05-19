@@ -25,13 +25,13 @@ class RayTest {
         List<Point> result0 = geo.findIntersections(r);
 
         assertEquals(new Point(0.25, 0.25, -3),
-                r.findClosetPoint(result0),
+                r.findClosestPoint(result0),
                 error);
 
         // =============== Boundary Values Tests ==================
         //TC10 empty list
         Ray r10 = new Ray(new Point(-10, 0, 0), new Vector(0, 0, -1));
-        assertNull(r10.findClosetPoint(geo.findIntersections(r10)),
+        assertNull(r10.findClosestPoint(geo.findIntersections(r10)),
                 "the number of intersection is wrong");
 
         //TC20 The closet point is the first point
@@ -44,7 +44,7 @@ class RayTest {
         Ray r20 = new Ray(new Point(0.25, 0.25, -4), new Vector(0, 0, 1));
 
         assertEquals(new Point(0.25, 0.25, -3),
-                r20.findClosetPoint(geo20.findIntersections(r20)),
+                r20.findClosestPoint(geo20.findIntersections(r20)),
                 error);
 
         //TC30 The closet point is the first point
@@ -58,7 +58,7 @@ class RayTest {
         Ray r30 = new Ray(new Point(0.25, 0.25, -4), new Vector(0, 0, 1));
 
         assertEquals(new Point(0.25, 0.25, -3),
-                r30.findClosetPoint(geo30.findIntersections(r30)),
+                r30.findClosestPoint(geo30.findIntersections(r30)),
                 error);
     }
 }

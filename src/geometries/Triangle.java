@@ -20,7 +20,7 @@ public class Triangle extends Polygon{
     }
 
     @Override
-    public List<Point> findIntersections(Ray ray) {
+    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
 
             Point trianglePoint1 = vertices.get(0);
             Point trianglePoint2 = vertices.get(1);;
@@ -60,11 +60,11 @@ public class Triangle extends Polygon{
             if (isZero(u) || isZero(v) || isZero(w)) {
                 return null;
             }
-
-
-            return List.of(new Point(w*trianglePoint1.getX() + u*trianglePoint2.getX() + v*trianglePoint3.getX(),
+            Point resultPoint= new Point(w*trianglePoint1.getX() + u*trianglePoint2.getX() + v*trianglePoint3.getX(),
                     w*trianglePoint1.getY() + u*trianglePoint2.getY() + v*trianglePoint3.getY(),
-                    w*trianglePoint1.getZ() + u*trianglePoint2.getZ() + v*trianglePoint3.getZ()));
+                    w*trianglePoint1.getZ() + u*trianglePoint2.getZ() + v*trianglePoint3.getZ());
+
+            return List.of(new GeoPoint(this,resultPoint));
 
 
         }

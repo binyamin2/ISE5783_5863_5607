@@ -6,6 +6,7 @@ import primitives.Vector;
 import static primitives.Util.*;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -52,7 +53,7 @@ public class Tube extends RadialGeometry {
      * @param ray
      * @return
      */
-    public List<Point> findIntersections(Ray ray) {
+    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
         // Get the starting point of the current object's axis ray and the input Ray object
         Vector v = axisRay.getV0();
         Vector u = ray.getV0();
@@ -105,7 +106,7 @@ public class Tube extends RadialGeometry {
                 if (deltaP.subtract(v.scale(deltaPDotV1 / vDotV)).lengthSquared() > radius * radius) {
                     return null;
                 }
-                return List.of(intersectionPoint);
+                return List.of(new GeoPoint(this ,intersectionPoint));
             } else { // Calculate two intersection points
                 double t1 = deltaPDotV / vDotV;
                 double t2 = t1 + Math.sqrt(radius * radius / vDotV - deltaP.lengthSquared() / vDotV / vDotV);
@@ -113,24 +114,25 @@ public class Tube extends RadialGeometry {
                 Point intersectionPoint1 = p1.add(u.scale(t1));
                 Point intersectionPoint2 = p1.add(u.scale(t2));
 
-                return List.of(intersectionPoint1, intersectionPoint2);
+                return List.of(new GeoPoint(this ,intersectionPoint1),
+                        new GeoPoint(this ,intersectionPoint2));
             }
         } else { // Calculate two intersection points
             double t1 = (-b - Math.sqrt(discriminant)) / (2.0 * a);
             double t2 = (-b + Math.sqrt(discriminant)) / (2.0 * a);
 
             // Check for intersection in the correct direction of the input Ray object
-            List<Point> intersections = new ArrayList<>();
+            List<GeoPoint> intersections = new LinkedList<>();
             if (!isZero(t1)) {
                 Point intersectionPoint1 = p1.add(u.scale(t1));
                 if (!isZero(intersectionPoint1.distance(p0)) && intersectionPoint1.subtract(p1).dotProduct(u) > 0) {
-                    intersections.add(intersectionPoint1);
+                    intersections.add(new GeoPoint(this ,intersectionPoint1));
                 }
             }
             if (!isZero(t2)) {
                 Point intersectionPoint2 = p1.add(u.scale(t2));
                 if (!isZero(intersectionPoint2.distance(p0)) && intersectionPoint2.subtract(p1).dotProduct(u) > 0) {
-                    intersections.add(intersectionPoint2);
+                    intersections.add(new GeoPoint(this ,intersectionPoint2));
                 }
             }
 
