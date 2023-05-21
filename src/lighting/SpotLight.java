@@ -10,6 +10,7 @@ import primitives.Vector;
 public class SpotLight extends PointLight{
 
     private Vector direction;
+    private double NarrowBeam=1;
 
     /**
      * ctor
@@ -22,10 +23,15 @@ public class SpotLight extends PointLight{
         this.direction = direction;
     }
 
+    public SpotLight setNarrowBeam(double narrowBeam) {
+        NarrowBeam = narrowBeam;
+        return this;
+    }
+
     @Override
     public Color getIntensity(Point p) {
         //calculate the light propagation model for Point light
         Vector L = getL(p);
-        return super.getIntensity(p).scale(Math.max(0,direction.dotProduct(L)));
+        return super.getIntensity(p).scale(Math.pow(Math.max(0,direction.normalize().dotProduct(L)),NarrowBeam));
     }
 }

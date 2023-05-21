@@ -110,7 +110,7 @@ public class Camera {
     /**
      * for each pixel in the view plane cast ray from ray to color
      */
-    public void renderImage(){
+    public Camera renderImage(){
         if (location == null) {
             throw new MissingResourceException("location is missing", "Point", "location");
         }
@@ -147,6 +147,7 @@ public class Camera {
                 this.imageWriter.writePixel(x,y, color);
             }
         }
+        return this;
     }
 
     /**
