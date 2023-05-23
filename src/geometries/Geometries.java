@@ -7,16 +7,17 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Geometries extends Intersectable {
-    List <Intersectable> geometries;
+    List<Intersectable> geometries;
 
     public Geometries() {
         this.geometries = new LinkedList<Intersectable>();
     }
-    public Geometries (Intersectable... geometries ){
+
+    public Geometries(Intersectable... geometries) {
         this.geometries = new LinkedList<Intersectable>(List.of(geometries));
     }
 
-    public void add (Intersectable... geometries ){
+    public void add(Intersectable... geometries) {
         this.geometries.addAll(List.of(geometries));
     }
 
@@ -25,20 +26,22 @@ public class Geometries extends Intersectable {
 
         if (geometries.size() == 0)
             return null;
-        else{
-            List<GeoPoint> result = new LinkedList<>();
 
-            for (Intersectable geometry : geometries)
-            {
-                List<GeoPoint> intersections = geometry.findGeoIntersections(ray);
-                if (intersections != null) {
-                    result.addAll(intersections);
+        List<GeoPoint> result =null; //new LinkedList<>();
+
+        for (Intersectable geometry : geometries) {
+            List<GeoPoint> intersections = geometry.findGeoIntersections(ray);
+            if (intersections != null) {
+                if (result == null) {
+                    result = new LinkedList<>();
                 }
+                result.addAll(intersections);
             }
-            if(result.isEmpty()){
-                return null;
-            }
-            return result;
         }
+           /* if(result.isEmpty()){
+                return null;
+           */
+        return result;
     }
+
 }

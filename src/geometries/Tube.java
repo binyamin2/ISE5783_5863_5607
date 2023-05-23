@@ -91,7 +91,7 @@ public class Tube extends RadialGeometry {
             }
 
             // Calculate the intersection point
-            Point intersectionPoint = p1.add(u.scale(t));
+            Point intersectionPoint =  ray.getPoint(t); //p1.add(u.scale(t));
 
             // Check if the intersection point is on the surface of the current object
             if (!isZero(intersectionPoint.distance(p0))) {
@@ -124,13 +124,13 @@ public class Tube extends RadialGeometry {
             // Check for intersection in the correct direction of the input Ray object
             List<GeoPoint> intersections = new LinkedList<>();
             if (!isZero(t1)) {
-                Point intersectionPoint1 = p1.add(u.scale(t1));
+                Point intersectionPoint1 = ray.getPoint(t1);
                 if (!isZero(intersectionPoint1.distance(p0)) && intersectionPoint1.subtract(p1).dotProduct(u) > 0) {
                     intersections.add(new GeoPoint(this ,intersectionPoint1));
                 }
             }
             if (!isZero(t2)) {
-                Point intersectionPoint2 = p1.add(u.scale(t2));
+                Point intersectionPoint2 = ray.getPoint(t2);
                 if (!isZero(intersectionPoint2.distance(p0)) && intersectionPoint2.subtract(p1).dotProduct(u) > 0) {
                     intersections.add(new GeoPoint(this ,intersectionPoint2));
                 }
