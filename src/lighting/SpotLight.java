@@ -32,6 +32,9 @@ public class SpotLight extends PointLight{
     public Color getIntensity(Point p) {
         //calculate the light propagation model for Point light
         Vector L = getL(p);
-        return super.getIntensity(p).scale(Math.pow(Math.max(0,direction.normalize().dotProduct(L)),NarrowBeam));
+        //choose the power of the light according the angle between the direction of the light and Vector p-position
+        //and pow according the NarrowBeam
+        double power=Math.pow(Math.max(0,direction.normalize().dotProduct(L)),NarrowBeam);
+        return super.getIntensity(p).scale(power);
     }
 }

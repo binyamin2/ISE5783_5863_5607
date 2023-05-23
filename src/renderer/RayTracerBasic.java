@@ -50,10 +50,17 @@ public class RayTracerBasic extends RayTracerBase {
     }
 
     private Color calcLocalEffects(GeoPoint gp, Ray ray) {
+
         Color color = gp.geometry.getEmission();
-        Vector v = ray.getV0 (); Vector n = gp.geometry.getNormal(gp.point);
-        double nv = alignZero(n.dotProduct(v)); if (nv == 0) return color;
+
+        Vector v = ray.getV0 ();
+        Vector n = gp.geometry.getNormal(gp.point);
+        //if the ray of camara and the normal at the point are vertical
+        double nv = alignZero(n.dotProduct(v));
+        if (nv == 0) return color;
+
         Material material = gp.geometry.getMaterial();
+        //for about all the light and add the light
         for (LightSource lightSource : scene.lights) {
             Vector l = lightSource.getL(gp.point);
             double nl = alignZero(n.dotProduct(l));
