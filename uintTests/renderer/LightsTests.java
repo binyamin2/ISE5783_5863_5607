@@ -17,12 +17,20 @@ public class LightsTests {
    private final Scene          scene2                  = new Scene("Test scene")
       .setAmbientLight(new AmbientLight(new Color(WHITE), new Double3(0.15)));
 
+   private final Scene          scene3                  = new Scene("Test scene")
+           .setAmbientLight(new AmbientLight(new Color(WHITE), new Double3(0.15)));
+
+
    private final Camera         camera1                 = new Camera(new Point(0, 0, 1000), new Vector(0, 1, 0),
                                                                      new Vector(0, 0, -1))
       .setVPSize(150, 150).setVPDistance(1000);
    private final Camera         camera2                 = new Camera(new Point(0, 0, 1000), new Vector(0, 1, 0),
                                                                      new Vector(0, 0, -1))
       .setVPSize(200, 200).setVPDistance(1000);
+
+   private final Camera         camera3                 = new Camera(new Point(0, 0, 1000), new Vector(0, 1, 0),
+           new Vector(0, 0, -1))
+           .setVPSize(200, 200).setVPDistance(1000);
 
    private static final int     SHININESS               = 301;
    private static final double  KD                      = 0.5;
@@ -61,6 +69,18 @@ public class LightsTests {
       .setMaterial(material);
    private final Geometry       triangle2               = new Triangle(vertices[0], vertices[1], vertices[3])
       .setMaterial(material);
+
+   private final Geometry       tube              = new Tube(2, new Ray(new Point(0,0,0),
+           new Vector(1,0,0)))
+           .setMaterial(material);
+
+   private final Geometry       tube1              = new Tube(2, new Ray(new Point(0,0,0),
+           new Vector(0,1,0)))
+           .setMaterial(material);
+
+   private final Geometry       tube2              = new Tube(2, new Ray(new Point(-10,0,0),
+           new Vector(0,0,1)))
+           .setMaterial(material);
 
    /** Produce a picture of a sphere lighted by a directional light */
    @Test
@@ -194,6 +214,27 @@ public class LightsTests {
 
    /** Produce a picture of a sphere lighted by a multiple light sources */
    @Test
+   public void testtubeMultipleLights() {
+      scene3.geometries.add(tube);
+      scene3.geometries.add(tube1);
+      scene3.geometries.add(tube2);
+      scene3.lights
+              .add(new SpotLight(sphereLightColor, sphereLightPosition, new Vector(1, 1, -0.5))
+                      .setKl(0.001).setKq(0.00004));
+      scene3.lights
+              .add(new PointLight(trianglesLightColor, new Point(75,-25,25))
+                      .setKl(0.002).setKq(0.0004));
+      scene3.lights
+              .add(new DirectionalLight(new Color(800,0,400), new Vector(0,-1,0)));
+
+
+      ImageWriter imageWriter = new ImageWriter("lighttubemultipleLigts", 500, 500);
+      camera3.setImageWriter(imageWriter) //
+              .setRayTracer(new RayTracerBasic(scene3)) //
+              .renderImage() //
+              .writeToImage(); //
+   }
+
    public void testsphereSpotMultipleLights() {
       scene1.geometries.add(sphere);
       scene1.lights
@@ -212,5 +253,4 @@ public class LightsTests {
               .renderImage() //
               .writeToImage(); //
    }
-
 }
