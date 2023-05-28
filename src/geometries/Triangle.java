@@ -64,6 +64,7 @@ public class Triangle extends Polygon{
                     w*trianglePoint1.getY() + u*trianglePoint2.getY() + v*trianglePoint3.getY(),
                     w*trianglePoint1.getZ() + u*trianglePoint2.getZ() + v*trianglePoint3.getZ());
 
+
             return List.of(new GeoPoint(this,resultPoint));
 
 
