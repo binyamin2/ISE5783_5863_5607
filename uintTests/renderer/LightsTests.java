@@ -65,7 +65,7 @@ public class LightsTests {
 
    private final Geometry       sphere                  = new Sphere( SPHERE_RADIUS,sphereCenter)
       .setEmission(sphereColor).setMaterial(new Material().setKd(KD).setKs(KS).setShininess(SHININESS));
-   private final Geometry       triangle1               = new Triangle(vertices[0], vertices[1], vertices[2])
+   private final Geometry       triangle1               = new Polygon(vertices[0], vertices[1], vertices[2])
       .setMaterial(material);
    private final Geometry       triangle2               = new Triangle(vertices[0], vertices[1], vertices[3])
       .setMaterial(material);

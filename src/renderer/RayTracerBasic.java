@@ -17,7 +17,7 @@ import static primitives.Util.alignZero;
  */
 public class RayTracerBasic extends RayTracerBase {
 
-    private static final double DELTA = 0.2;
+    private static final double DELTA = 0.1;
 
 
     /**
@@ -125,6 +125,8 @@ public class RayTracerBasic extends RayTracerBase {
         Point point = gp.point.add(epsVector);
         Ray lightRay = new Ray(point, lightDirection);
         List<GeoPoint> intersections = scene.geometries.findGeoIntersections(lightRay);
+
+
         if (intersections == null) return true;
         //return that shaded if its diractional light
         /*if (light instanceof DirectionalLight)
@@ -133,7 +135,7 @@ public class RayTracerBasic extends RayTracerBase {
 
         double lightDistance = light.getDistance(point);
         for (GeoPoint geo : intersections) {
-            if (point.distance(geo.point) < lightDistance) {
+            if (point.distance(geo.point) < lightDistance ) {
                 return false;
             }
         }

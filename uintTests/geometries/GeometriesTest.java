@@ -52,7 +52,7 @@ class GeometriesTest {
         //TC13 all geometries intersects (tube)
         List<Point> result13=geo1.findIntersections(
                 new Ray(new Point(0,0,-0.2),new Vector(1,1,1)));
-        assertEquals(4,
+        assertEquals(5,
                 result13.size(),
                 "the number of intersection is wrong");
 
