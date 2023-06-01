@@ -2,6 +2,14 @@ package primitives;
 
 public class Material {
     public Double3 kD=Double3.ZERO,kS=Double3.ZERO;
+    /**
+     * refraction
+     */
+    public Double3 kT=Double3.ZERO;
+    /**
+     * reflection
+     */
+    public Double3 kR=Double3.ZERO;
     public int Shininess=0;
 
     /**
@@ -54,6 +62,47 @@ public class Material {
         return this;
 
     }
+
+    /**
+     * set the refraction
+     * @param kT
+     * @return
+     */
+    public Material setKt(Double3 kT) {
+        this.kT = kT;
+        return this;
+    }
+
+    /**
+     * set the refraction
+     * @param kT
+     * @return
+     */
+    public Material setKt(double kT) {
+        this.kT = new Double3(kT);
+        return this;
+    }
+
+    /**
+     * set the reflection
+     * @param kR
+     * @return
+     */
+    public Material setKr(Double3 kR) {
+        this.kR = kR;
+        return this;
+    }
+
+    /**
+     * set the reflection
+     * @param kR
+     * @return
+     */
+    public Material setKr(double kR) {
+        this.kR=new Double3(kR);
+        return this;
+    }
+
     /**
      * set the shininess
      * @param nShininess

@@ -10,7 +10,7 @@ import geometries.Intersectable.GeoPoint;
 public class Ray {
     final Point p0;
     final Vector v0;
-
+    private static final double DELTA = 0.1;
     /**
      * constructor
      *
@@ -21,7 +21,11 @@ public class Ray {
         this.p0 = p0;
         this.v0 = v0.normalize();
     }
-
+    public Ray(Point p0, Vector v, Vector n) {
+        double delta = v.dotProduct(n) >= 0 ? DELTA : -DELTA;
+        this.p0 = p0.add(n.scale(delta));
+        this.v0 = v;
+    }
     public Point getP0() {
         return p0;
     }
