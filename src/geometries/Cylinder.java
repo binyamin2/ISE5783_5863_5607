@@ -5,6 +5,7 @@ import primitives.Ray;
 import primitives.Vector;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -56,76 +57,59 @@ public class Cylinder extends Tube{
     }
 
     @Override
-    public List<Point> findIntersections(Ray ray) {
-        Point center=this.getCenter();
-        // Check if the ray is equivalent to the axis ray of the cylinder
-        if (ray.getV0().normalize().dotProduct(getAxisRay().getV0().normalize()) == 1 ||
-                ray.getV0().normalize().dotProduct(getAxisRay().getV0().normalize()) == -1) {
-            List<Point> intersections = new ArrayList<>();
+    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
+        List<GeoPoint> result = new LinkedList<>();
+        Vector va = this.axisRay.getV0();
+        Point p1 = this.axisRay.getP0();
+        Point p2 = p1.add(this.axisRay.getV0().scale(this.height));
 
-            // Calculate the intersection of the ray with the planes that define the top and bottom ends of the cylinder
-            double t1 = (height / 2.0 - (ray.getP0().subtract(getAxisRay().getP0())).dotProduct(getAxisRay().getV0().normalize())) / ray.getV0().dotProduct(getAxisRay().getV0().normalize());
-            double t2 = (-height / 2.0 - (ray.getP0().subtract(getAxisRay().getP0())).dotProduct(getAxisRay().getV0().normalize())) / ray.getV0().dotProduct(getAxisRay().getV0().normalize());
+        Plane plane1 = new Plane(p1, this.axisRay.getV0()); //get plane of bottom base
+        List<GeoPoint> result2 = plane1.findGeoIntersections(ray); //intersections with bottom's plane
 
-            // Check if the intersection points are within the cylinder's radius
-            Point intersection1 = ray.getPoint(t1);
-            if (intersection1.subtract(center).lengthSquared() <= radius * radius) {
-                intersections.add(intersection1);
-            }
-            Point intersection2 = ray.getPoint(t2);
-            if (intersection2.subtract(center).lengthSquared() <= radius * radius) {
-                intersections.add(intersection2);
-            }
-
-            if (intersections.isEmpty()) {
-                return null;
-            }
-
-            return intersections;
-        }
-
-        // Get the intersections with the tube
-        List<Point> intersections = super.findIntersections(ray);
-
-        if (intersections == null) {
-            // No intersections with the tube, so no intersections with the cylinder
-            return null;
-        }
-
-        // Calculate the intersection points with the ends of the cylinder
-        Point p0 = getAxisRay().getP0();
-        Vector v = getAxisRay().getV0().normalize();
-
-        List<Point> endIntersections = new ArrayList<>();
-        double t1 = (height / 2.0 - p0.subtract(ray.getP0()).dotProduct(v)) / ray.getV0().dotProduct(v);
-        if (t1 > 0) {
-            Point intersection1 = ray.getP0().add(ray.getV0().scale(t1));
-            if (intersection1.subtract(center).lengthSquared() <= radius * radius) {
-                endIntersections.add(intersection1);
+        if (result2 != null) {
+            //Add all intersections of bottom's plane that are in the base's bounders
+            for (GeoPoint point : result2) {
+                if (point.point.equals(p1)) { //to avoid vector ZERO
+                    result.add(point);
+                }
+                //checks that point is inside the base
+                else if ((point.point.subtract(p1).dotProduct(point.point.subtract(p1)) < this.radius * this.radius)) {
+                    result.add(point);
+                }
             }
         }
 
-        double t2 = (-height / 2.0 - p0.subtract(ray.getP0()).dotProduct(v)) / ray.getV0().dotProduct(v);
-        if (t2 > 0) {
-            Point intersection2 = ray.getP0().add(ray.getV0().scale(t2));
-            if (intersection2.subtract(center).lengthSquared() <= radius * radius) {
-                endIntersections.add(intersection2);
+        List<GeoPoint> result1 = super.findGeoIntersectionsHelper(ray); //get intersections for tube
+
+        if (result1 != null) {
+            //Add all intersections of tube that are in the cylinder's bounders
+            for (GeoPoint point : result1) {
+                if (va.dotProduct(point.point.subtract(p1)) > 0 && va.dotProduct(point.point.subtract(p2)) < 0) {
+                    result.add(point);
+                }
             }
         }
 
-        if (endIntersections.isEmpty()) {
-            // No intersections with the ends of the cylinder
-            return intersections;
+        Plane plane2 = new Plane(p2, this.axisRay.getV0()); //get plane of top base
+        List<GeoPoint> result3 = plane2.findGeoIntersections(ray); //intersections with top's plane
+
+        if (result3 != null) {
+            for (GeoPoint point : result3) {
+                if (point.point.equals(p2)) { //to avoid vector ZERO
+                    result.add(point);
+                }
+                //Formula that checks that point is inside the base
+                else if ((point.point.subtract(p2).dotProduct(point.point.subtract(p2)) < this.radius * this.radius)) {
+                    result.add(point);
+                }
+            }
         }
 
-        if (intersections.isEmpty()) {
-            // No intersections with the tube, only with the ends of the cylinder
-            return endIntersections;
+        if (result.size() > 0) {
+            return result;
         }
 
-        // Merge the intersection points from the tube and the ends of the cylinder
-        intersections.addAll(endIntersections);
-        return intersections;
+        return null;
     }
 
     public Point getCenter() {

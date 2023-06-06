@@ -74,6 +74,14 @@ public class RayTracerBasic extends RayTracerBase {
         return 1 == level ? color : color.add(calcGlobalEffects(gp, ray, level, k));
     }
 
+    /**
+     * cakc the global effect on point (reflection,refraction..)
+     * @param gp
+     * @param ray
+     * @param level
+     * @param k
+     * @return
+     */
     private Color calcGlobalEffects(GeoPoint gp, Ray ray,
                                     int level, Double3 k) {
         Color color = Color.BLACK;
@@ -82,13 +90,22 @@ public class RayTracerBasic extends RayTracerBase {
         Material material = gp.geometry.getMaterial();
         return calcGlobalEffect(constructReflected(gp, v, n),level, k, material.kR).
                 add(calcGlobalEffect(constructRefracted(gp, v,n),level, k, material.kT));}
+
+    /**
+     * recursive help function to calc the global effects
+     * @param ray
+     * @param level
+     * @param k
+     * @param kx
+     * @return
+     */
     private Color calcGlobalEffect(Ray ray, int level, Double3 k, Double3 kx) {Double3 kkx = k.product(kx);
         if (kkx.lowerThan(MIN_CALC_COLOR_K)) return Color.BLACK;
         GeoPoint gp = findClosestIntersection(ray);
         if (gp == null)
             return scene.background.scale(kx);
         return isZero(gp.geometry.getNormal(gp.point).dotProduct(ray.getV0()))?
-                Color.BLACK : calcColor(gp, ray, level-1, kkx);}
+                Color.BLACK : calcColor(gp, ray, level-1, kkx).scale(kx);}
 
     /**
      * calc the local effect (diffusive,specular,emission,lights)
@@ -150,39 +167,48 @@ public class RayTracerBasic extends RayTracerBase {
         return material.kD.scale(Math.abs(nl));
     }
 
+//    /**
+//     * check if the point is shaded
+//     * @param gp
+//     * @param l
+//     * @param n
+//     * @param nl
+//     * @return
+//     */
+//    private boolean unshaded(GeoPoint gp,LightSource light, Vector l, Vector n, double nl) {
+//        if (!gp.geometry.getMaterial().kT.equals(Double3.ZERO))
+//            return true;
+//        Vector lightDirection = l.scale(-1); // from point to light source
+//        Vector epsVector = n.scale(nl < 0 ? DELTA : -DELTA);
+//        Point point = gp.point.add(epsVector);
+//        Ray lightRay = new Ray(point, lightDirection);
+//        List<GeoPoint> intersections = scene.geometries.findGeoIntersections(lightRay);
+//
+//
+//        if (intersections == null) return true;
+//        //return that shaded if its diractional light
+//        /*if (light instanceof DirectionalLight)
+//            return false;*/
+//        //check if there is pointbetween the light and geoPoint
+//
+//        double lightDistance = light.getDistance(point);
+//        for (GeoPoint geo : intersections) {
+//            if (point.distance(geo.point) < lightDistance ) {
+//                return false;
+//            }
+//        }
+//
+//        return true;
+//    }
+
     /**
-     * check if the point is shaded
-     * @param gp
+     * return the level of the shadow
+     * @param geopoint
+     * @param light
      * @param l
      * @param n
-     * @param nl
      * @return
      */
-    private boolean unshaded(GeoPoint gp,LightSource light, Vector l, Vector n, double nl) {
-        if (!gp.geometry.getMaterial().kT.equals(Double3.ZERO))
-            return true;
-        Vector lightDirection = l.scale(-1); // from point to light source
-        Vector epsVector = n.scale(nl < 0 ? DELTA : -DELTA);
-        Point point = gp.point.add(epsVector);
-        Ray lightRay = new Ray(point, lightDirection);
-        List<GeoPoint> intersections = scene.geometries.findGeoIntersections(lightRay);
-
-
-        if (intersections == null) return true;
-        //return that shaded if its diractional light
-        /*if (light instanceof DirectionalLight)
-            return false;*/
-        //check if there is pointbetween the light and geoPoint
-
-        double lightDistance = light.getDistance(point);
-        for (GeoPoint geo : intersections) {
-            if (point.distance(geo.point) < lightDistance ) {
-                return false;
-            }
-        }
-
-        return true;
-    }
     private Double3 transparency(GeoPoint geopoint, LightSource light, Vector l, Vector n) {
         Vector lightDirection = l.scale(-1); // from point to light source
         Ray lightRay = new Ray(geopoint.point, lightDirection, n); //build ray with delta
@@ -228,6 +254,12 @@ public class RayTracerBasic extends RayTracerBase {
         return new Ray(gp.point,v,n);
 
     }
+
+    /**
+     * find the closest intersection on excepted ray
+     * @param ray
+     * @return
+     */
     private GeoPoint findClosestIntersection(Ray ray){
         List<GeoPoint> intersections=this.scene.geometries.findGeoIntersections(ray);
         return ray.findClosestGeoPoint(intersections);

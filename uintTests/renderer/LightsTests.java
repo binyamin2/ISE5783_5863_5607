@@ -28,9 +28,11 @@ public class LightsTests {
                                                                      new Vector(0, 0, -1))
       .setVPSize(200, 200).setVPDistance(1000);
 
-   private final Camera         camera3                 = new Camera(new Point(0, 0, 1000), new Vector(0, 1, 0),
-           new Vector(0, 0, -1))
-           .setVPSize(200, 200).setVPDistance(1000);
+   private final Camera         camera3                 = new Camera(
+           new Point(0, 0, -500),    // Camera position
+           new Vector(0, 1, 0),     // Up vector
+           new Vector(0, 0, 1)      // Direction vector
+   )  .setVPSize(200, 200).setVPDistance(1000);
 
    private static final int     SHININESS               = 301;
    private static final double  KD                      = 0.5;
@@ -70,17 +72,74 @@ public class LightsTests {
    private final Geometry       triangle2               = new Triangle(vertices[0], vertices[1], vertices[3])
       .setMaterial(material);
 
-   private final Geometry       tube              = new Tube(2, new Ray(new Point(0,0,0),
-           new Vector(1,0,0)))
+   private final Geometry       tube              = new Cylinder(10, new Ray(new Point(0,0,0),
+           new Vector(1,0,0)),70)
            .setMaterial(material);
 
-   private final Geometry       tube1              = new Tube(2, new Ray(new Point(0,0,0),
-           new Vector(0,1,0)))
+   private final Geometry       tube1              = new Cylinder(10, new Ray(new Point(0,0,0),
+           new Vector(0,1,0)),70)
            .setMaterial(material);
 
-   private final Geometry       tube2              = new Tube(2, new Ray(new Point(-10,0,0),
-           new Vector(0,0,1)))
+   private final Geometry       tube2              = new Cylinder(10, new Ray(new Point(-10,0,0),
+           new Vector(0,0,1)),70)
            .setMaterial(material);
+
+   private Geometry triangle11 = new Triangle(
+           new Point(-10, 10, 0),
+           new Point(0, 10, 0),
+           new Point(-5, 20, 0)
+   ).setEmission(new Color(156, 200, 100)).setMaterial(material.setKt(1));
+
+   private Geometry triangle22 = new Triangle(
+           new Point(10, 10, 0),
+           new Point(20, 10, 0),
+           new Point(15, 20, 0)
+   ).setEmission(new Color(255, 0, 0)).setMaterial(material.setKt(0.5).setKr(0.3));
+
+   private Geometry polygon = new Polygon(
+           new Point(0, 0, 0),
+           new Point(5, 0, 0),
+           new Point(7.5, 4.33, 0),
+           new Point(5, 8.66, 0),
+           new Point(0, 8.66, 0),
+           new Point(-2.5, 4.33, 0)
+   ).setEmission(new Color(0, 0, 255)).setMaterial(material.setKt(0.5).setKr(0.7));
+
+   private Geometry sphere1 = new Sphere(
+           7.5,
+           new Point(-10, -10, 0)
+   ).setEmission(new Color(255, 255, 0)).setMaterial(material.setKt(0.5).setKr(0.7));
+
+   private Geometry sphere2 = new Sphere(
+           5,
+           new Point(10, -10, 0)
+   ).setEmission(new Color(255, 255, 255)).setMaterial(material.setKt(0.5).setKr(0.7));
+
+   private Geometry tube11 = new Tube(
+           2,
+           new Ray(new Point(-15, 0, 0), new Vector(0, 1, 0))
+   ).setEmission(new Color(0, 255, 0)).setMaterial(material.setKt(0.5).setKr(0.7));
+
+   private Geometry tube22 = new Tube(
+           1,
+           new Ray(new Point(5, -15, 0), new Vector(0, 1, 0))
+   ).setEmission(new Color(128, 128, 128)).setMaterial(material.setKt(0.5).setKr(0.7));
+
+   private Geometry tube3 = new Tube(
+           1.5,
+           new Ray(new Point(-15, -15, 0), new Vector(0, 1, 0))
+   ).setEmission(new Color(255, 128, 0)).setMaterial(material.setKt(0.5).setKr(0.7));
+
+   private Geometry tube4 = new Tube(
+           1.5,
+           new Ray(new Point(15, -15, 0), new Vector(0, 1, 0))
+   ).setEmission(new Color(0, 255, 255)).setMaterial(material.setKt(0.5).setKr(0.7));
+
+   private Geometry tube5 = new Tube(
+           2,
+           new Ray(new Point(-5, -20, 0), new Vector(0, 1, 0))
+   ).setEmission(new Color(255, 0, 255)).setMaterial(material.setKt(0.5).setKr(0.7));
+
 
    /** Produce a picture of a sphere lighted by a directional light */
    @Test
@@ -234,7 +293,7 @@ public class LightsTests {
               .renderImage() //
               .writeToImage(); //
    }
-
+   @Test
    public void testsphereSpotMultipleLights() {
       scene1.geometries.add(sphere);
       scene1.lights
@@ -250,6 +309,35 @@ public class LightsTests {
       ImageWriter imageWriter = new ImageWriter("lightSpheremultipleLigts", 500, 500);
       camera1.setImageWriter(imageWriter) //
               .setRayTracer(new RayTracerBasic(scene1)) //
+              .renderImage() //
+              .writeToImage(); //
+   }
+   @Test
+   public void testMultiplegieometries() {
+
+      scene3.geometries.add(triangle11);
+      scene3.geometries.add(triangle22);
+      scene3.geometries.add(tube11);
+      scene3.geometries.add(tube22);
+      scene3.geometries.add(tube3);
+      scene3.geometries.add(tube4);
+      scene3.geometries.add(tube5);
+      scene3.geometries.add(sphere1);
+      scene3.geometries.add(sphere2);
+      scene3.geometries.add(polygon);
+      scene3.lights
+              .add(new SpotLight(sphereLightColor, sphereLightPosition, new Vector(1, 1, -0.5))
+                      .setKl(0.001).setKq(0.00004));
+      scene3.lights
+              .add(new PointLight(trianglesLightColor, new Point(0,10,0))
+                      .setKl(0.002).setKq(0.0004));
+      scene3.lights
+              .add(new DirectionalLight(new Color(800,0,400), new Vector(0,-1,0)));
+
+
+      ImageWriter imageWriter = new ImageWriter("multipleGeometries", 500, 500);
+      camera3.setImageWriter(imageWriter) //
+              .setRayTracer(new RayTracerBasic(scene3)) //
               .renderImage() //
               .writeToImage(); //
    }
