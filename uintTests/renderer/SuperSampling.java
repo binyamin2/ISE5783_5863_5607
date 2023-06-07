@@ -1,58 +1,121 @@
 package renderer;
 
 
-import primitives.Point;
+import geometries.*;
+import lighting.AmbientLight;
+import lighting.PointLight;
+import lighting.SpotLight;
+import org.junit.jupiter.api.Test;
+import primitives.*;
+import scene.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
- class SuperSampling {
+import static java.awt.Color.WHITE;
 
-     public static List<Point> generateJitteredPoints(int nx, int ny, int x, int y, double viewWidth, double viewHeight, Point center, int numberOfPoints) {
-         List<Point> points = new ArrayList<>();
+class SuperSampling {
+     private Scene scene = new Scene("Test scene");
+     @Test
+     void glossyReflectionSuperSampling() {
+         Camera camera = new Camera(new Point(0, 1600, 10000), new Vector(0, 1, 0), new Vector(0, 0, -1)) //
+                 .setVPSize(2500, 2500).setVPDistance(10000); //
 
-         double pixelWidth = viewWidth / (nx );
-         double pixelHeight = viewHeight / (ny);
+         scene.setAmbientLight(new AmbientLight(new Color(255, 255, 255), new Double3(0.1)));
+
+         scene.geometries.add( //
+                 new Polygon(new Point(1000, -700, -4000), new Point(1000, 1000, -4000), new Point(-700, 1000, -4000), new Point(-700, -700, -4000))
+                         .setMaterial(new Material().setKd(0.25).setKs(1).setShininess(200).setKr(1).setGlossiness(15)),
+                 new Triangle(new Point(-930,-630,-500), new Point(500,-500,250), new Point(320,280,-1000)).setEmission(new Color(0, 0, 100)) //
+                         .setMaterial(new Material().setKd(0.25).setKs(0.25).setShininess(20)),
+                 new Triangle(new Point(-930,-630,-500), new Point(500,-500,250), new Point(600,-1300,-1000)).setEmission(new Color(0, 0, 100)) //
+                         .setMaterial(new Material().setKd(0.25).setKs(0.25).setShininess(20)),
+                 new Triangle(new Point(-930,-630,-500), new Point(600,-1300,-1000), new Point(320,280,-1000)).setEmission(new Color(0, 0, 100)) //
+                         .setMaterial(new Material().setKd(0.25).setKs(0.25).setShininess(20)),
+                 new Triangle(new Point(500,-500,250), new Point(600,-1300,-1000), new Point(320,280,-1000)).setEmission(new Color(0, 0, 100)) //
+                         .setMaterial(new Material().setKd(0.25).setKs(0.25).setShininess(20)));
+         //new Sphere(new Point(200, 200, -1000), 400d).setEmission(new Color(0, 0, 100)) //
+         //		.setMaterial(new Material().setKd(0.25).setKs(0.25).setShininess(20)));
 
 
-         double pixelX = center.getX() - (viewWidth / 2) + (x * pixelWidth);
-         double pixelY = center.getY() + (viewHeight / 2) - (y * pixelHeight);
-         double pixelZ = center.getZ();
-         double numSubPixel =Math.sqrt(numberOfPoints);
-         double subWidth = pixelWidth/numSubPixel;
-         double subHeight = pixelHeight/numSubPixel;
+         scene.lights.add(new PointLight(new Color(255, 255, 255), new Point(0, 1000, 300)) //
+                 .setKl(0.00000001).setKq(0.000000000005));
 
-         Random random = new Random();
-
-         for (int i = 0; i < numSubPixel; i++) {
-             for (int j = 0; j < numSubPixel; j++){
-             double randomX = pixelX + i * subWidth + random.nextDouble(0,subWidth);
-             double randomY = pixelY - j * subHeight - random.nextDouble(0,subHeight);
-             double randomZ = pixelZ;
-
-             points.add(new Point(randomX, randomY, randomZ));
-         }}
-
-         return points;
+         ImageWriter imageWriter = new ImageWriter("BirdGlossyReflectionSuperSampling", 500, 500);
+         camera.setImageWriter(imageWriter).setBlackboard(15)//
+                 .setRayTracer(new RayTracerBasic(scene).setGlossyRaysAmount(15)) //
+                 .renderImage() //
+                 .writeToImage();
      }
+     @Test
+     void blurryRefractionSuperSampling(){
+         Camera camera = new Camera(new Point(0, 0, 10000), new Vector(0, 1, 0), new Vector(0, 0, -1)) //
+                 .setVPSize(2500, 2500).setVPDistance(10000); //
 
-     public static void main(String[] args) {
-         // Example usage
-         int nx = 9;
-         int ny = 9;
-         int x = 6;
-         int y = 6;
-         double viewWidth = 9.0;
-         double viewHeight = 9.0;
-         Point center = new Point(0, 0, 0);
-         int numberOfPoints = 9;
+         scene.setAmbientLight(new AmbientLight(new Color(255, 255, 255), new Double3(0.1)));
 
-         List<Point> jitteredPoints = generateJitteredPoints(nx, ny, x, y, viewWidth, viewHeight, center, numberOfPoints);
+         scene.geometries.add( //
+                 new Polygon(new Point(800, -400, 0), new Point(800, 800, 0), new Point(-400, 800, 0), new Point(-400, -400, 0))
+                         .setMaterial(new Material().setKd(0.25).setKs(0.25).setShininess(20).setKt(0.3).setDiffuseness(20)),
+                 new Triangle(new Point(-930,-630,-1500), new Point(500,-500,-750), new Point(320,280,-2000)).setEmission(new Color(0, 0, 100)) //
+                         .setMaterial(new Material().setKd(0.25).setKs(0.25).setShininess(20)),
+                 new Triangle(new Point(-930,-630,-1500), new Point(500,-500,-750), new Point(600,-1300,-2000)).setEmission(new Color(0, 0, 100)) //
+                         .setMaterial(new Material().setKd(0.25).setKs(0.25).setShininess(20)),
+                 new Triangle(new Point(-930,-630,-1500), new Point(600,-1300,-2000), new Point(320,280,-2000)).setEmission(new Color(0, 0, 100)) //
+                         .setMaterial(new Material().setKd(0.25).setKs(0.25).setShininess(20)),
+                 new Triangle(new Point(500,-500,-750), new Point(600,-1300,-2000), new Point(320,280,-2000)).setEmission(new Color(0, 0, 100)) //
+                         .setMaterial(new Material().setKd(0.25).setKs(0.25).setShininess(20)));
+         //new Sphere(new Point(200, 200, -1000), 400d).setEmission(new Color(0, 0, 100)) //
+         //		.setMaterial(new Material().setKd(0.25).setKs(0.25).setShininess(20)));
 
-         for (Point point : jitteredPoints) {
-             System.out.println(point);
-         }
+
+         scene.lights.add(new PointLight(new Color(255, 255, 255), new Point(0, 0, 300)) //
+                 .setKl(0.00000001).setKq(0.000000000005));
+
+         ImageWriter imageWriter = new ImageWriter("BirdBlurryRefractionSuperSampling", 500, 500);
+         camera.setImageWriter(imageWriter).setBlackboard(15)
+                 //
+                 .setRayTracer(new RayTracerBasic(scene).setDiffusiveRaysAmount(15)) //
+                 .renderImage() //
+                 .writeToImage();
      }
+    @Test
+    public void trianglesSphere3() {
+        Camera        camera     = new Camera(new Point(0, 0, 1000), new Vector(0, 1, 0), new Vector(0, 0, -1))   //
+                .setVPSize(200, 200).setVPDistance(1000)                                                                       //
+                .setRayTracer(new RayTracerBasic(scene).setGlossyRaysAmount(20));
+        scene.setAmbientLight(new AmbientLight(new Color(WHITE), 0.15));
 
-}
+        scene.geometries.add( //
+//                new Triangle(new Point(-150, -150, -115), new Point(150, -150, -135),
+//                        new Point(75, 75, -150)) //
+//                        .setMaterial(new Material().setKd(0.25).setKs(1).setShininess(200).setKr(1).setGlossiness(5)),
+//                new Triangle(new Point(-150, -150, -115), new Point(-70, 70, -140), new Point(75, 75, -150)) //
+//                        .setMaterial(new Material().setKd(0.25).setKs(1).setShininess(200).setKr(1).setGlossiness(5)),
+                new Plane(new Point(0,-30,-11),new Vector(0, 1, 0))
+                        .setMaterial(new Material().setKd(0.25).setKs(1).setShininess(200).setKr(1).setGlossiness(5)),
+                new Plane(new Point(0,-30,-110),new Vector(0, 0, 1))
+                        .setMaterial(new Material().setKd(0.25).setKs(1).setShininess(200).setKr(1).setGlossiness(50)),
+                new Cylinder(10,new Ray(new Point(40,10,-11),new Vector(1,1,0)),50)
+                        .setEmission(new Color(13,140,179)) //
+                        .setMaterial(new Material().setKd(0.2).setKs(1).setShininess(100).setKt(0.8)),
+                new Sphere(30d,new Point(-10, 0, -11)) //
+                        .setEmission(new Color(212,100,55)) //
+                        .setMaterial(new Material().setKd(0.2).setKs(1).setShininess(200).setKr(0.8)) //
+        );
+        scene.lights.add( //
+                new SpotLight(new Color(700, 400, 400), new Point(40, 40, 115), new Vector(-1, -1, -4)) //
+                        .setKl(0.003).setKq(2E-5));
+                scene.lights.add(
+                new PointLight(new Color(700, 400, 400),new Point(-10,70,-11))
+                        .setKl(0.003).setKq(2E-5));
+
+        camera.setImageWriter(new ImageWriter("shadowTrianglesSphere3", 600, 600))
+                .setBlackboard(9) //
+                .renderImage() //
+                .writeToImage();
+    }
+
+
+ }

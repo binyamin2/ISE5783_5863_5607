@@ -8,11 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import static primitives.Util.random;
+
 /**
  * class board of points in pixel for the ray beam
  */
 public class Blackboard {
     List<Point> jitteredTamplate;
+    List<Point> glossyTamplate;
 
     double nX;
 
@@ -21,6 +24,8 @@ public class Blackboard {
     double width;
     double height;
     int numberOfPoints;
+
+
 
     /**
      * ctor
@@ -97,5 +102,34 @@ public class Blackboard {
             rayBeam.add(new Ray(CameraPosition, t.subtract(CameraPosition).normalize()));
         }
         return rayBeam;
+    }
+
+    /**
+     * calculate the ray beam
+     * @param ray center ray
+     * @param raysAmount how many rays
+     * @param distanceFromTargetArea for the opennes of the angle
+     * @param targetAreaSize
+     * @return
+     */
+    public static List<Ray> constructMultiSamplingRaysRandom(Ray ray, double raysAmount, double distanceFromTargetArea, double targetAreaSize) {
+        ArrayList<Ray> resultList = new ArrayList<Ray>();
+
+        //find the X,Y
+        Vector rotatedVector, v1 = ray.getV0().findOrthogonal(),
+                v2 = v1.crossProduct(ray.getV0());
+        Point point, targetAreaCenter = ray.getPoint(distanceFromTargetArea);//move the point to the target area
+        resultList.add(ray);
+        if (raysAmount == 0)
+            return resultList;
+        double randomRadius, randomAngle; //randomise points on circle
+        for (int i = 1; i < raysAmount; i++) {
+            randomRadius = random(0.01, targetAreaSize);
+            randomAngle = random(0, 360);
+            rotatedVector = v1.rotate(v2, randomAngle);
+            point = targetAreaCenter.add(rotatedVector.scale(randomRadius));
+            resultList.add(new Ray(ray.getP0(), point.subtract(ray.getP0())));
+        }
+        return resultList;
     }
 }

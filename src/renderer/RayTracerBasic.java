@@ -1,8 +1,6 @@
 package renderer;
 
-import lighting.DirectionalLight;
 import lighting.LightSource;
-import lighting.PointLight;
 import primitives.*;
 import geometries.Intersectable.GeoPoint;
 
@@ -19,11 +17,42 @@ import static primitives.Util.isZero;
 public class RayTracerBasic extends RayTracerBase {
 
     private static final double DELTA = 0.1;
-    private static final int MAX_CALC_COLOR_LEVEL = 10;
+    private static final int MAX_CALC_COLOR_LEVEL = 3;
     private static final double MIN_CALC_COLOR_K = 0.001;
     private static final Double3 INITIAL_K = Double3.ONE;
 
+    /**
+     * for calculate the opennes of the ray beam
+     */
+    private final double distanceFromTargetArea = 1000;
+    /**
+     * for glossy reflection
+     */
+    private double glossyRaysAmount = 1;
+    /**
+     * for diffusive glass
+     */
+    private double diffusiveraysamount = 1;
 
+    /**
+     * set the amount of the glossy beam
+     * @param glossyRaysAmount
+     * @return
+     */
+    public RayTracerBasic setGlossyRaysAmount(double glossyRaysAmount) {
+        this.glossyRaysAmount = glossyRaysAmount;
+        return  this;
+    }
+
+    /**
+     * set the amount of the diffusive beam
+     * @param diffusiveRaysAmount
+     * @return
+     */
+    public RayTracerBasic setDiffusiveRaysAmount(double diffusiveRaysAmount) {
+        this.diffusiveraysamount = diffusiveRaysAmount;
+        return this;
+    }
 
     /**
      * ctor
@@ -88,8 +117,58 @@ public class RayTracerBasic extends RayTracerBase {
         Vector v = ray.getV0();
         Vector n = gp.geometry.getNormal(gp.point);
         Material material = gp.geometry.getMaterial();
-        return calcGlobalEffect(constructReflected(gp, v, n),level, k, material.kR).
-                add(calcGlobalEffect(constructRefracted(gp, v,n),level, k, material.kT));}
+        Double3 kkr = k.product(material.kR);
+        if (!kkr.lowerThan(MIN_CALC_COLOR_K)) { // the color is effected by the reflection
+            Ray centerReflectedRay = constructReflected(gp, v, n);
+            double glossiness = material.glossiness;
+
+            if (material.isGlossy()) { // glossiness = glossy reflection
+               // construct a ray beam for glossiness
+                List<Ray> rayList = Blackboard.constructMultiSamplingRaysRandom(centerReflectedRay, glossyRaysAmount,
+                        distanceFromTargetArea, glossiness);
+                int beamSize = rayList.size();
+                //calc average of the ray beam
+                for (Ray r : rayList) {
+                    double nr = n.dotProduct(r.getV0());
+                    double nc = n.dotProduct(centerReflectedRay.getV0());
+                    if (nr * nc > 0) // the ray has to be in the normal direction to be reflected correctly
+                        color = color.add(calcGlobalEffect(r, level, material.kR, kkr));
+                    else
+                        beamSize--;
+                }
+                color = color.reduce(beamSize);
+            } else
+                color = calcGlobalEffect(centerReflectedRay, level, material.kR, kkr);
+        }
+        Double3 kkt = k.product(material.kT);
+        if (!kkt.lowerThan(MIN_CALC_COLOR_K)) {// the color is effected due to the transparency
+            // construct a ray beam for glossiness
+            Ray centerRefractedRay = constructRefracted(gp, v, n);
+            double diffuseness = material.diffuseness;
+
+            if (material.isDiffusive()) { // diffuseness = diffusive refraction
+
+                List<Ray> rayList = Blackboard.constructMultiSamplingRaysRandom(centerRefractedRay, diffusiveraysamount,
+                        distanceFromTargetArea, diffuseness);
+                int beamSize = rayList.size();
+                //calc average of the ray beam
+                for (Ray r : rayList) {
+                    double nr = n.dotProduct(r.getV0());
+                    double nc = n.dotProduct(centerRefractedRay.getV0());
+                    if (nr * nc > 0)// the ray has to be in the opposite direction of the normal refracted correctly
+                        color = color.add(calcGlobalEffect(r, level, material.kT, kkt));
+                    else
+                        beamSize--;
+                }
+                color = color.reduce(beamSize); // average the color
+            } else
+                color = color.add(calcGlobalEffect(centerRefractedRay, level, material.kT, kkt));
+
+        }
+        return color;
+    }
+
+
 
     /**
      * recursive help function to calc the global effects

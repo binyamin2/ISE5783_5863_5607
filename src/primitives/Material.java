@@ -1,5 +1,7 @@
 package primitives;
 
+import static primitives.Util.isZero;
+
 public class Material {
     public Double3 kD=Double3.ZERO,kS=Double3.ZERO;
     /**
@@ -11,6 +13,26 @@ public class Material {
      */
     public Double3 kR=Double3.ZERO;
     public int Shininess=0;
+    public double glossiness = 0;
+    public double diffuseness = 0;
+
+    public Material setGlossiness(double glossiness) {
+        this.glossiness = glossiness;
+        return this;
+    }
+
+    public Material setDiffuseness(double diffuseness) {
+        this.diffuseness = diffuseness;
+        return this;
+    }
+
+    public boolean isDiffusive() {
+        return !isZero(diffuseness);
+    }
+
+    public boolean isGlossy() {
+        return !isZero(glossiness);
+    }
 
     /**
      * set the  defusive
