@@ -5,6 +5,8 @@ import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
 
+import javax.swing.text.Position;
+import java.util.List;
 import java.util.MissingResourceException;
 
 import static primitives.Util.*;
@@ -13,20 +15,21 @@ import static primitives.Util.*;
  * class for camera represent a camera with details on view plane
  */
 public class Camera {
-    private Point location;
-    private Vector vright;
-    private Vector vup;
-    private Vector vto;
+    private final Point location;
+    private final Vector vright;
+    private final Vector vup;
+    private final Vector vto;
     private double height;
     private double width;
     private double distance;
     private ImageWriter imageWriter;
     private RayTracerBase rayTracer;
-
+    private Blackboard blackboard;
 
 
     /**
      * ctor
+     *
      * @param location
      * @param vup
      * @param vto
@@ -40,8 +43,10 @@ public class Camera {
         this.vto = vto.normalize();
         this.vright = vto.crossProduct(vup).normalize();
     }
+
     /**
      * set the image writer
+     *
      * @param iw
      * @return camera
      */
@@ -52,6 +57,7 @@ public class Camera {
 
     /**
      * set the ray tracer
+     *
      * @param rtb
      * @return camera
      */
@@ -62,6 +68,7 @@ public class Camera {
 
     /**
      * set the size of view plane with builder pattern
+     *
      * @param width
      * @param height
      * @return camera
@@ -74,6 +81,7 @@ public class Camera {
 
     /**
      * set vp distance from camera
+     *
      * @param distance
      * @return camera
      */
@@ -84,33 +92,34 @@ public class Camera {
 
     /**
      * return the ray that go through the pixel
+     *
      * @param nX number of columns
      * @param nY number of rows
-     * @param j number of the specific column pixel
-     * @param i number of the specific row pixel
+     * @param j  number of the specific column pixel
+     * @param i  number of the specific row pixel
      * @return ray
      */
     public Ray constructRay(int nX, int nY, int j, int i) {
         //calculate the center of the excepted pixel with the given formula
-        Point pc=this.location.add(vto.scale(distance));
-        if (nY==0 && nX==0)
+        Point pc = this.location.add(vto.scale(distance));
+        if (nY == 0 && nX == 0)
             throw new IllegalArgumentException("divided by zero");
-        double ry=height/nY;
-        double rx=width/nX;
-        double xj=(j-(nX-1.0)/2.0)*rx;
-        double yi=-(i-(nY-1.0)/2.0)*ry;
-        Point pij=pc;
-        if (! isZero(xj))
-            pij=pij.add(vright.scale(xj));
-        if (! isZero(yi))
-            pij=pij.add(vup.scale(yi));
-        return new Ray(location,pij.subtract(location));
+        double ry = height / nY;
+        double rx = width / nX;
+        double xj = (j - (nX - 1.0) / 2.0) * rx;
+        double yi = -(i - (nY - 1.0) / 2.0) * ry;
+        Point pij = pc;
+        if (!isZero(xj))
+            pij = pij.add(vright.scale(xj));
+        if (!isZero(yi))
+            pij = pij.add(vup.scale(yi));
+        return new Ray(location, pij.subtract(location));
     }
 
     /**
      * for each pixel in the view plane cast ray from ray to color
      */
-    public Camera renderImage(){
+    public Camera renderImage() {
         if (location == null) {
             throw new MissingResourceException("location is missing", "Point", "location");
         }
@@ -141,21 +150,33 @@ public class Camera {
         int nx = imageWriter.getNx();
         int ny = imageWriter.getNy();
 
-        for (int x = 0; x < nx; x++ ){
-            for (int y = 0; y < ny; y++ ){
-                Color color = this.castRay(nx, ny, x, y);
-                this.imageWriter.writePixel(x,y, color);
+        if (blackboard == null) {
+            for (int x = 0; x < nx; x++) {
+                for (int y = 0; y < ny; y++) {
+                    Color color = this.castRay(nx, ny, x, y);
+                    this.imageWriter.writePixel(x, y, color);
+                }
             }
+            return this;
+        } else {
+            Point pc = this.location.add(vto.scale(distance));
+            for (int x = 0; x < nx; x++) {
+                for (int y = 0; y < ny; y++) {
+                    Color color = this.castRayBeam(nx, ny, x, y, pc.getZ());
+                    this.imageWriter.writePixel(x, y, color);
+                }
+            }
+            return this;
         }
-        return this;
     }
 
     /**
      * cast the ray to color
-     *@param nx number of columns
-     *@param ny number of rows
-     *@param x number of the specific column pixel
-     *@param y number of the specific row pixel
+     *
+     * @param nx number of columns
+     * @param ny number of rows
+     * @param x  number of the specific column pixel
+     * @param y  number of the specific row pixel
      * @return
      */
     private Color castRay(int nx, int ny, int x, int y) {
@@ -164,19 +185,41 @@ public class Camera {
     }
 
     /**
+     * cast the ray beam to a color
+     * @param nx
+     * @param ny
+     * @param x
+     * @param y
+     * @param z
+     * @return
+     */
+    private Color castRayBeam(int nx, int ny, int x, int y, double z) {
+        List<Ray> rayBeam = blackboard.constructRayBeam(x, y, z, location);
+
+        Color average = new Color(0, 0, 0);
+        //calc the average
+        for (var ray : rayBeam) {
+            Color c = rayTracer.traceRay(ray);
+            average = average.add(rayTracer.traceRay(ray));
+        }
+        return average.reduce(this.blackboard.numberOfPoints);
+    }
+
+    /**
      * print grid on the picture
+     *
      * @param interval
      * @param color
      */
-    public void printGrid (int interval , Color color){
-        if (this.imageWriter ==null){
+    public void printGrid(int interval, Color color) {
+        if (this.imageWriter == null) {
             throw new MissingResourceException("iw is missing", "ImageWriter", "iw");
         }
-        for (int x = 0; x < imageWriter.getNx(); x++ ){
-            for (int y = 0; y < imageWriter.getNy(); y++ ){
+        for (int x = 0; x < imageWriter.getNx(); x++) {
+            for (int y = 0; y < imageWriter.getNy(); y++) {
 
-                if (x % interval == 0 || y % interval ==0)
-                    imageWriter.writePixel(x,y,color);
+                if (x % interval == 0 || y % interval == 0)
+                    imageWriter.writePixel(x, y, color);
 
             }
         }
@@ -185,8 +228,8 @@ public class Camera {
     /**
      * write the data to image
      */
-    public void writeToImage(){
-        if (this.imageWriter ==null){
+    public void writeToImage() {
+        if (this.imageWriter == null) {
             throw new MissingResourceException("iw is missing", "ImageWriter", "iw");
         }
         imageWriter.writeToImage();
@@ -218,5 +261,16 @@ public class Camera {
 
     public double getDistance() {
         return distance;
+    }
+
+    /**
+     * set the blackBoard
+     * @param numberOfPoints
+     * @return
+     */
+    public Camera setBlackboard(int numberOfPoints) {
+        this.blackboard = new Blackboard(imageWriter.getNx(), imageWriter.getNx(), width, height)
+                .setNumberOfPoints(numberOfPoints);
+        return this;
     }
 }

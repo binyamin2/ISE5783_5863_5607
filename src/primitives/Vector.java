@@ -29,6 +29,10 @@ public class Vector extends Point{
             throw new IllegalArgumentException("vector cannot be zero");
     }
 
+    public Vector(Point point) {
+        super(point.xyz);
+    }
+
     /**
      * vector addition
      * @param v vector

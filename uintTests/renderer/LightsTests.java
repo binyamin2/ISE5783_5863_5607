@@ -19,6 +19,8 @@ public class LightsTests {
 
    private final Scene          scene3                  = new Scene("Test scene")
            .setAmbientLight(new AmbientLight(new Color(WHITE), new Double3(0.15)));
+   private final Scene          scene4                  = new Scene("Test scene")
+           .setAmbientLight(new AmbientLight(new Color(WHITE), new Double3(0.15)));
 
 
    private final Camera         camera1                 = new Camera(new Point(0, 0, 1000), new Vector(0, 1, 0),
@@ -27,8 +29,11 @@ public class LightsTests {
    private final Camera         camera2                 = new Camera(new Point(0, 0, 1000), new Vector(0, 1, 0),
                                                                      new Vector(0, 0, -1))
       .setVPSize(200, 200).setVPDistance(1000);
+   private final Camera         camera3                 = new Camera(new Point(0, 0, 1000), new Vector(0, 1, 0),
+           new Vector(0, 0, -1))
+           .setVPSize(200, 200).setVPDistance(1000);
 
-   private final Camera         camera3                 = new Camera(
+   private final Camera         camera4                 = new Camera(
            new Point(0, 0, -500),    // Camera position
            new Vector(0, 1, 0),     // Up vector
            new Vector(0, 0, 1)      // Direction vector
@@ -108,12 +113,12 @@ public class LightsTests {
    private Geometry sphere1 = new Sphere(
            7.5,
            new Point(-10, -10, 0)
-   ).setEmission(new Color(255, 255, 0)).setMaterial(material.setKt(0.5).setKr(0.7));
+   ).setEmission(new Color(192, 192, 192)).setMaterial(material.setKt(0.9).setKs(1));
 
    private Geometry sphere2 = new Sphere(
            5,
            new Point(10, -10, 0)
-   ).setEmission(new Color(255, 255, 255)).setMaterial(material.setKt(0.5).setKr(0.7));
+   ).setEmission(new Color(212, 175, 55)).setMaterial(material.setKt(0.9).setKs(1));
 
    private Geometry tube11 = new Tube(
            2,
@@ -315,29 +320,29 @@ public class LightsTests {
    @Test
    public void testMultiplegieometries() {
 
-      scene3.geometries.add(triangle11);
-      scene3.geometries.add(triangle22);
-      scene3.geometries.add(tube11);
-      scene3.geometries.add(tube22);
-      scene3.geometries.add(tube3);
-      scene3.geometries.add(tube4);
-      scene3.geometries.add(tube5);
-      scene3.geometries.add(sphere1);
-      scene3.geometries.add(sphere2);
-      scene3.geometries.add(polygon);
-      scene3.lights
+      scene4.geometries.add(triangle11);
+      scene4.geometries.add(triangle22);
+      scene4.geometries.add(tube11);
+      scene4.geometries.add(tube22);
+      scene4.geometries.add(tube3);
+      scene4.geometries.add(tube4);
+      scene4.geometries.add(tube5);
+      scene4.geometries.add(sphere1);
+      scene4.geometries.add(sphere2);
+      scene4.geometries.add(polygon);
+      scene4.lights
               .add(new SpotLight(sphereLightColor, sphereLightPosition, new Vector(1, 1, -0.5))
                       .setKl(0.001).setKq(0.00004));
-      scene3.lights
+      scene4.lights
               .add(new PointLight(trianglesLightColor, new Point(0,10,0))
                       .setKl(0.002).setKq(0.0004));
-      scene3.lights
-              .add(new DirectionalLight(new Color(800,0,400), new Vector(0,-1,0)));
+      scene4.lights
+              .add(new DirectionalLight(new Color(800,0,400), new Vector(-1,-1,0)));
 
 
       ImageWriter imageWriter = new ImageWriter("multipleGeometries", 500, 500);
-      camera3.setImageWriter(imageWriter) //
-              .setRayTracer(new RayTracerBasic(scene3)) //
+      camera4.setImageWriter(imageWriter) //
+              .setRayTracer(new RayTracerBasic(scene4)) //
               .renderImage() //
               .writeToImage(); //
    }

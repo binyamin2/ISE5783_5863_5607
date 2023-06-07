@@ -4,12 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="963acc02-6f7d-40d1-83cb-daf4b44206d2" name="Changes" comment="refactoring lights">
+    <list default="true" id="963acc02-6f7d-40d1-83cb-daf4b44206d2" name="Changes" comment="stage_7">
+      <change afterPath="$PROJECT_DIR$/src/renderer/Blackboard.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uintTests/renderer/SuperSampling.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/geometries/Cylinder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/Cylinder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/primitives/Vector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/primitives/Vector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/renderer/Camera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/Camera.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/renderer/RayTracerBasic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/RayTracerBasic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uintTests/geometries/CylinderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/uintTests/geometries/CylinderTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uintTests/renderer/CameraTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/uintTests/renderer/CameraTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/uintTests/renderer/LightsTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/uintTests/renderer/LightsTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uintTests/renderer/ShadowTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/uintTests/renderer/ShadowTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,48 +112,46 @@
       <recent name="C:\Users\binyamin\IdeaProjects\ISE5783_5863_5607\uintTests\renderer" />
       <recent name="C:\Users\User\IdeaProjects\ISE5783_5863_5607\uintTests\renderer" />
     </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="renderer" />
+    </key>
     <key name="CreateTestDialog.RecentsKey">
       <recent name="primitives" />
       <recent name="renderer" />
       <recent name="geometries" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.LightsTests.testMultiplegieometries">
+  <component name="RunManager" selected="JUnit.All in ISE5783_5863_5607">
+    <configuration name="JitteredPixelPoints" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="renderer.JitteredPixelPoints" />
+      <module name="ISE5783_5863_5607" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="renderer.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SuperSampling" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="renderer.SuperSampling" />
+      <module name="ISE5783_5863_5607" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="renderer.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="All in ISE5783_5863_5607" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ISE5783_5863_5607" />
       <option name="PACKAGE_NAME" value="" />
       <option name="TEST_OBJECT" value="package" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CylinderTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ISE5783_5863_5607" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="geometries.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="geometries" />
-      <option name="MAIN_CLASS_NAME" value="geometries.CylinderTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CylinderTest.testfindIntersections" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ISE5783_5863_5607" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="geometries.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="geometries" />
-      <option name="MAIN_CLASS_NAME" value="geometries.CylinderTest" />
-      <option name="METHOD_NAME" value="testfindIntersections" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -170,7 +172,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="LightsTests.testtubeMultipleLights" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ShadowTests.trianglesSphere2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ISE5783_5863_5607" />
       <extension name="coverage">
         <pattern>
@@ -179,8 +181,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="renderer" />
-      <option name="MAIN_CLASS_NAME" value="renderer.LightsTests" />
-      <option name="METHOD_NAME" value="testtubeMultipleLights" />
+      <option name="MAIN_CLASS_NAME" value="renderer.ShadowTests" />
+      <option name="METHOD_NAME" value="trianglesSphere2" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -188,11 +190,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.LightsTests.testMultiplegieometries" />
         <item itemvalue="JUnit.All in ISE5783_5863_5607" />
-        <item itemvalue="JUnit.LightsTests.testtubeMultipleLights" />
-        <item itemvalue="JUnit.CylinderTest.testfindIntersections" />
-        <item itemvalue="JUnit.CylinderTest" />
+        <item itemvalue="JUnit.ShadowTests.trianglesSphere2" />
+        <item itemvalue="JUnit.LightsTests.testMultiplegieometries" />
+        <item itemvalue="Application.SuperSampling" />
+        <item itemvalue="Application.JitteredPixelPoints" />
       </list>
     </recent_temporary>
   </component>
@@ -227,7 +229,7 @@
       <workItem from="1684246568886" duration="4040000" />
       <workItem from="1684483080628" duration="7559000" />
       <workItem from="1684839221323" duration="5727000" />
-      <workItem from="1686035047875" duration="1797000" />
+      <workItem from="1686035047875" duration="24877000" />
     </task>
     <task id="LOCAL‎-00001" summary="start">
       <created>1677000663387</created>
@@ -341,7 +343,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685606717417</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL‎-00017" summary="stage_7">
+      <created>1686038792523</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL‎-00017" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1686038792523</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -375,7 +384,8 @@
     <MESSAGE value="lighting and local effects" />
     <MESSAGE value="add test for multiple lights" />
     <MESSAGE value="Finish Shadow" />
-    <option name="LAST_COMMIT_MESSAGE" value="Finish Shadow" />
+    <MESSAGE value="stage_7" />
+    <option name="LAST_COMMIT_MESSAGE" value="stage_7" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -427,7 +437,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/renderer/RayTracerBasic.java</url>
-          <line>106</line>
+          <line>107</line>
           <option name="timeStamp" value="73" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -439,6 +449,16 @@
           <url>file://$PROJECT_DIR$/uintTests/geometries/CylinderTest.java</url>
           <line>75</line>
           <option name="timeStamp" value="75" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/renderer/Camera.java</url>
+          <line>198</line>
+          <option name="timeStamp" value="86" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/renderer/Blackboard.java</url>
+          <line>90</line>
+          <option name="timeStamp" value="88" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
