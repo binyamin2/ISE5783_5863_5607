@@ -125,7 +125,7 @@ public class RayTracerBasic extends RayTracerBase {
             if (material.isGlossy()) { // glossiness = glossy reflection
                // construct a ray beam for glossiness
                 List<Ray> rayList = Blackboard.constructMultiSamplingRaysRandom(centerReflectedRay, glossyRaysAmount,
-                        distanceFromTargetArea, glossiness);
+                        distanceFromTargetArea, glossiness,glossiness);
                 int beamSize = rayList.size();
                 //calc average of the ray beam
                 for (Ray r : rayList) {
@@ -149,7 +149,7 @@ public class RayTracerBasic extends RayTracerBase {
             if (material.isDiffusive()) { // diffuseness = diffusive refraction
 
                 List<Ray> rayList = Blackboard.constructMultiSamplingRaysRandom(centerRefractedRay, diffusiveraysamount,
-                        distanceFromTargetArea, diffuseness);
+                        distanceFromTargetArea, diffuseness,diffuseness);
                 int beamSize = rayList.size();
                 //calc average of the ray beam
                 for (Ray r : rayList) {

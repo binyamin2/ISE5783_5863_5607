@@ -99,7 +99,7 @@ class SuperSampling {
                         .setMaterial(new Material().setKd(0.25).setKs(1).setShininess(200).setKr(1).setGlossiness(50)),
                 new Cylinder(10,new Ray(new Point(40,10,-11),new Vector(1,1,0)),50)
                         .setEmission(new Color(13,140,179)) //
-                        .setMaterial(new Material().setKd(0.2).setKs(1).setShininess(100).setKt(0.8)),
+                        .setMaterial(new Material().setKd(0.9).setKs(0.3).setShininess(20).setKr(0.8)),
                 new Sphere(30d,new Point(-10, 0, -11)) //
                         .setEmission(new Color(212,100,55)) //
                         .setMaterial(new Material().setKd(0.2).setKs(1).setShininess(200).setKr(0.8)) //
@@ -108,7 +108,7 @@ class SuperSampling {
                 new SpotLight(new Color(700, 400, 400), new Point(40, 40, 115), new Vector(-1, -1, -4)) //
                         .setKl(0.003).setKq(2E-5));
                 scene.lights.add(
-                new PointLight(new Color(700, 400, 400),new Point(-10,70,-11))
+                new PointLight(new Color(56, 230, 50),new Point(-10,70,-11))
                         .setKl(0.003).setKq(2E-5));
 
         camera.setImageWriter(new ImageWriter("shadowTrianglesSphere3", 600, 600))

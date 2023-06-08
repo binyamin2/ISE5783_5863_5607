@@ -100,6 +100,12 @@ public class Vector extends Point{
         return new Vector(this.xyz.reduce(this.length()));
     }
 
+    /**
+     *
+     * @param axis
+     * @param angle
+     * @return
+     */
     public Vector rotate(Vector axis, double angle){
         double x, y, z;
         double u, v, w;

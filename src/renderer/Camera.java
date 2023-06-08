@@ -194,7 +194,9 @@ public class Camera {
      * @return
      */
     private Color castRayBeam(int nx, int ny, int x, int y, double z) {
-        List<Ray> rayBeam = blackboard.constructRayBeam(x, y, z, location);
+        Ray centerRay=this.constructRay(nx,ny,x,y);
+        List<Ray> rayBeam = Blackboard.constructMultiSamplingRaysRandom(centerRay, blackboard.numberOfPoints,this.distance,
+                width/nx,height/ny);
 
         Color average = new Color(0, 0, 0);
         //calc the average

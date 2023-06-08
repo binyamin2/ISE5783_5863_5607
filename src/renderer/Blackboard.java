@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import static primitives.Util.isZero;
 import static primitives.Util.random;
 
 /**
@@ -109,25 +110,30 @@ public class Blackboard {
      * @param ray center ray
      * @param raysAmount how many rays
      * @param distanceFromTargetArea for the opennes of the angle
-     * @param targetAreaSize
+     * @param pixelWidth
      * @return
      */
-    public static List<Ray> constructMultiSamplingRaysRandom(Ray ray, double raysAmount, double distanceFromTargetArea, double targetAreaSize) {
+    public static List<Ray> constructMultiSamplingRaysRandom(Ray ray, double raysAmount, double distanceFromTargetArea,
+                                                             double pixelWidth,double pixelHeight) {
         ArrayList<Ray> resultList = new ArrayList<Ray>();
 
         //find the X,Y
-        Vector rotatedVector, v1 = ray.getV0().findOrthogonal(),
-                v2 = v1.crossProduct(ray.getV0());
+        Vector rotatedVector, vUp = ray.getV0().findOrthogonal(),
+                vRight = vUp.crossProduct(ray.getV0()).normalize();
         Point point, targetAreaCenter = ray.getPoint(distanceFromTargetArea);//move the point to the target area
         resultList.add(ray);
         if (raysAmount == 0)
             return resultList;
-        double randomRadius, randomAngle; //randomise points on circle
+        double randomWidth, randomHeight; //randomise points on circle
         for (int i = 1; i < raysAmount; i++) {
-            randomRadius = random(0.01, targetAreaSize);
-            randomAngle = random(0, 360);
-            rotatedVector = v1.rotate(v2, randomAngle);
-            point = targetAreaCenter.add(rotatedVector.scale(randomRadius));
+            randomWidth = random(-pixelWidth/2, pixelWidth/2);
+            randomHeight = random(-pixelHeight/2, pixelHeight/2);
+            rotatedVector = vUp.rotate(vRight, randomHeight);
+            point = targetAreaCenter;
+            if (!isZero(randomWidth))
+                point = point.add(vRight.scale(randomWidth));
+            if (!isZero(randomHeight))
+                point = point.add(vUp.scale(randomHeight));
             resultList.add(new Ray(ray.getP0(), point.subtract(ray.getP0())));
         }
         return resultList;
