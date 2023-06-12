@@ -17,9 +17,10 @@ import static primitives.Util.isZero;
 public class RayTracerBasic extends RayTracerBase {
 
     private static final double DELTA = 0.1;
-    private static final int MAX_CALC_COLOR_LEVEL = 3;
+    private static final int MAX_CALC_COLOR_LEVEL = 2;
     private static final double MIN_CALC_COLOR_K = 0.001;
     private static final Double3 INITIAL_K = Double3.ONE;
+
 
     /**
      * for calculate the opennes of the ray beam
@@ -28,18 +29,18 @@ public class RayTracerBasic extends RayTracerBase {
     /**
      * for glossy reflection
      */
-    private double glossyRaysAmount = 1;
+    private int glossyRaysAmount = 1;
     /**
      * for diffusive glass
      */
-    private double diffusiveraysamount = 1;
+    private int diffusiveraysamount = 1;
 
     /**
      * set the amount of the glossy beam
      * @param glossyRaysAmount
      * @return
      */
-    public RayTracerBasic setGlossyRaysAmount(double glossyRaysAmount) {
+    public RayTracerBasic setGlossyRaysAmount(int glossyRaysAmount) {
         this.glossyRaysAmount = glossyRaysAmount;
         return  this;
     }
@@ -49,7 +50,7 @@ public class RayTracerBasic extends RayTracerBase {
      * @param diffusiveRaysAmount
      * @return
      */
-    public RayTracerBasic setDiffusiveRaysAmount(double diffusiveRaysAmount) {
+    public RayTracerBasic setDiffusiveRaysAmount(int diffusiveRaysAmount) {
         this.diffusiveraysamount = diffusiveRaysAmount;
         return this;
     }
@@ -113,6 +114,7 @@ public class RayTracerBasic extends RayTracerBase {
      */
     private Color calcGlobalEffects(GeoPoint gp, Ray ray,
                                     int level, Double3 k) {
+
         Color color = Color.BLACK;
         Vector v = ray.getV0();
         Vector n = gp.geometry.getNormal(gp.point);
@@ -124,8 +126,10 @@ public class RayTracerBasic extends RayTracerBase {
 
             if (material.isGlossy()) { // glossiness = glossy reflection
                // construct a ray beam for glossiness
-                List<Ray> rayList = Blackboard.constructMultiSamplingRaysRandom(centerReflectedRay, glossyRaysAmount,
+
+                List<Ray> rayList = Blackboard.constructRayBeam(centerReflectedRay, glossyRaysAmount,
                         distanceFromTargetArea, glossiness,glossiness);
+
                 int beamSize = rayList.size();
                 //calc average of the ray beam
                 for (Ray r : rayList) {
@@ -137,6 +141,7 @@ public class RayTracerBasic extends RayTracerBase {
                         beamSize--;
                 }
                 color = color.reduce(beamSize);
+
             } else
                 color = calcGlobalEffect(centerReflectedRay, level, material.kR, kkr);
         }
@@ -148,7 +153,7 @@ public class RayTracerBasic extends RayTracerBase {
 
             if (material.isDiffusive()) { // diffuseness = diffusive refraction
 
-                List<Ray> rayList = Blackboard.constructMultiSamplingRaysRandom(centerRefractedRay, diffusiveraysamount,
+                List<Ray> rayList = Blackboard.constructRayBeam(centerRefractedRay, diffusiveraysamount,
                         distanceFromTargetArea, diffuseness,diffuseness);
                 int beamSize = rayList.size();
                 //calc average of the ray beam

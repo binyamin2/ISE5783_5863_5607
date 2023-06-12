@@ -6,7 +6,6 @@ import primitives.Vector;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import static primitives.Util.isZero;
 import static primitives.Util.random;
@@ -15,41 +14,49 @@ import static primitives.Util.random;
  * class board of points in pixel for the ray beam
  */
 public class Blackboard {
-    List<Point> jitteredTamplate;
-    List<Point> glossyTamplate;
-
-    double nX;
-
-    double ny;
-
-    double width;
-    double height;
-    int numberOfPoints;
 
 
 
     /**
-     * ctor
-     * @param nX
-     * @param ny
-     * @param width
-     * @param height
+     * calculate the ray beam
+     * @param ray center ray
+     * @return
      */
-    public Blackboard(double nX, double ny, double width, double height) {
-        this.nX = nX;
-        this.ny = ny;
-        this.width = width;
-        this.height = height;
-        this.numberOfPoints = 1;
+    public static List<Ray> constructRayBeam(Ray ray,int numberOfRays, double distance, double pixelWidth, double pixelHeight ) {
+        ArrayList<Ray> resultList = new ArrayList<Ray>();
 
-
+        //find the X,Y
+        Vector rotatedVector, vUp = ray.getV0().findOrthogonal(),
+                vRight = vUp.crossProduct(ray.getV0()).normalize();
+        Point point, targetAreaCenter = ray.getPoint(distance);//move the point to the target area
+        resultList.add(ray);
+        if (numberOfRays == 0)
+            return resultList;
+        double randomWidth, randomHeight; //randomise points on circle
+        for (int i = 1; i < numberOfRays; i++) {
+            randomWidth = random(-pixelWidth /2, pixelWidth /2);
+            randomHeight = random(-pixelHeight/2, pixelHeight/2);
+            rotatedVector = vUp.rotate(vRight, randomHeight);
+            point = targetAreaCenter;
+            if (!isZero(randomWidth))
+                point = point.add(vRight.scale(randomWidth));
+            if (!isZero(randomHeight))
+                point = point.add(vUp.scale(randomHeight));
+            resultList.add(new Ray(ray.getP0(), point.subtract(ray.getP0())));
+        }
+        return resultList;
     }
 
-    /**
+
+
+
+
+    //bounos jiterd
+    /* *//**
      * set the number of points in every pixel and build the tamplate of jitterd
      * @param numberOfPoints
      * @return
-     */
+     *//*
     public Blackboard setNumberOfPoints(int numberOfPoints) {
         this.numberOfPoints = numberOfPoints;
         this.jitteredTamplate = new ArrayList<>();
@@ -73,7 +80,7 @@ public class Blackboard {
             }
         }
         return this;
-    }
+    }*/
 
     /**
      * construct ray beam for pixel
@@ -83,10 +90,10 @@ public class Blackboard {
      * @param CameraPosition
      * @return
      */
-    public List<Ray> constructRayBeam(int x, int y, double z, Point CameraPosition) {
+/*    public List<Ray> constructRayBeam(int x, int y, double z, Point CameraPosition) {
         List<Ray> rayBeam = new ArrayList<>();
-        double pixelWidth = width / (nX);
-        double pixelHeight = height / (ny);
+        double pixelWidth = PixelWidth / (nX);
+        double pixelHeight = PixelHeight / (ny);
         //the up left edge of pixel
         Point start = new Point(
                 -nX / 2 * pixelWidth + pixelWidth * x,
@@ -103,39 +110,7 @@ public class Blackboard {
             rayBeam.add(new Ray(CameraPosition, t.subtract(CameraPosition).normalize()));
         }
         return rayBeam;
-    }
+    }*/
 
-    /**
-     * calculate the ray beam
-     * @param ray center ray
-     * @param raysAmount how many rays
-     * @param distanceFromTargetArea for the opennes of the angle
-     * @param pixelWidth
-     * @return
-     */
-    public static List<Ray> constructMultiSamplingRaysRandom(Ray ray, double raysAmount, double distanceFromTargetArea,
-                                                             double pixelWidth,double pixelHeight) {
-        ArrayList<Ray> resultList = new ArrayList<Ray>();
 
-        //find the X,Y
-        Vector rotatedVector, vUp = ray.getV0().findOrthogonal(),
-                vRight = vUp.crossProduct(ray.getV0()).normalize();
-        Point point, targetAreaCenter = ray.getPoint(distanceFromTargetArea);//move the point to the target area
-        resultList.add(ray);
-        if (raysAmount == 0)
-            return resultList;
-        double randomWidth, randomHeight; //randomise points on circle
-        for (int i = 1; i < raysAmount; i++) {
-            randomWidth = random(-pixelWidth/2, pixelWidth/2);
-            randomHeight = random(-pixelHeight/2, pixelHeight/2);
-            rotatedVector = vUp.rotate(vRight, randomHeight);
-            point = targetAreaCenter;
-            if (!isZero(randomWidth))
-                point = point.add(vRight.scale(randomWidth));
-            if (!isZero(randomHeight))
-                point = point.add(vUp.scale(randomHeight));
-            resultList.add(new Ray(ray.getP0(), point.subtract(ray.getP0())));
-        }
-        return resultList;
-    }
 }

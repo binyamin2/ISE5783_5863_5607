@@ -19,7 +19,7 @@ class SuperSampling {
      private Scene scene = new Scene("Test scene");
      @Test
      void glossyReflectionSuperSampling() {
-         Camera camera = new Camera(new Point(0, 1600, 10000), new Vector(0, 1, 0), new Vector(0, 0, -1)) //
+         Camera camera = new Camera(new Point(0, 0, 10000), new Vector(0, 1, 0), new Vector(0, 0, -1)) //
                  .setVPSize(2500, 2500).setVPDistance(10000); //
 
          scene.setAmbientLight(new AmbientLight(new Color(255, 255, 255), new Double3(0.1)));
@@ -43,7 +43,7 @@ class SuperSampling {
                  .setKl(0.00000001).setKq(0.000000000005));
 
          ImageWriter imageWriter = new ImageWriter("BirdGlossyReflectionSuperSampling", 500, 500);
-         camera.setImageWriter(imageWriter).setBlackboard(15)//
+         camera.setImageWriter(imageWriter).setBlackboard(81)//
                  .setRayTracer(new RayTracerBasic(scene).setGlossyRaysAmount(15)) //
                  .renderImage() //
                  .writeToImage();
@@ -84,7 +84,7 @@ class SuperSampling {
     public void trianglesSphere3() {
         Camera        camera     = new Camera(new Point(0, 0, 1000), new Vector(0, 1, 0), new Vector(0, 0, -1))   //
                 .setVPSize(200, 200).setVPDistance(1000)                                                                       //
-                .setRayTracer(new RayTracerBasic(scene).setGlossyRaysAmount(20));
+                .setRayTracer(new RayTracerBasic(scene).setGlossyRaysAmount(10));
         scene.setAmbientLight(new AmbientLight(new Color(WHITE), 0.15));
 
         scene.geometries.add( //

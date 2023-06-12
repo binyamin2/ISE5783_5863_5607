@@ -5,7 +5,6 @@ import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
 
-import javax.swing.text.Position;
 import java.util.List;
 import java.util.MissingResourceException;
 
@@ -24,8 +23,13 @@ public class Camera {
     private double distance;
     private ImageWriter imageWriter;
     private RayTracerBase rayTracer;
-    private Blackboard blackboard;
+    private int numberOfRays = 1;
+    private boolean adaptive =false;
 
+    public Camera setAdaptive() {
+        this.adaptive = true;
+        return this;
+    }
 
     /**
      * ctor
@@ -150,7 +154,7 @@ public class Camera {
         int nx = imageWriter.getNx();
         int ny = imageWriter.getNy();
 
-        if (blackboard == null) {
+        if (numberOfRays == 1) {
             for (int x = 0; x < nx; x++) {
                 for (int y = 0; y < ny; y++) {
                     Color color = this.castRay(nx, ny, x, y);
@@ -195,8 +199,9 @@ public class Camera {
      */
     private Color castRayBeam(int nx, int ny, int x, int y, double z) {
         Ray centerRay=this.constructRay(nx,ny,x,y);
-        List<Ray> rayBeam = Blackboard.constructMultiSamplingRaysRandom(centerRay, blackboard.numberOfPoints,this.distance,
-                width/nx,height/ny);
+        Color centerColor = rayTracer.traceRay(centerRay);
+        List<Ray> rayBeam = Blackboard.constructRayBeam(centerRay, 4,distance,
+                this.width/nx,this.height/ny);
 
         Color average = new Color(0, 0, 0);
         //calc the average
@@ -204,7 +209,25 @@ public class Camera {
             Color c = rayTracer.traceRay(ray);
             average = average.add(rayTracer.traceRay(ray));
         }
-        return average.reduce(this.blackboard.numberOfPoints);
+        //chack for addaptive
+
+
+
+        if (adaptive && centerColor.equals(average.reduce(4))){
+            if (!centerColor.equals(Color.BLACK))
+                return centerColor;
+            return centerColor;}
+
+
+        rayBeam = Blackboard.constructRayBeam(centerRay, numberOfRays - 4,distance,
+                this.width/nx,this.height/ny);
+
+        for (var ray : rayBeam) {
+            Color c = rayTracer.traceRay(ray);
+            average = average.add(rayTracer.traceRay(ray));
+        }
+
+        return average.reduce(numberOfRays);
     }
 
     /**
@@ -267,12 +290,11 @@ public class Camera {
 
     /**
      * set the blackBoard
-     * @param numberOfPoints
+     * @param numberOfRays
      * @return
      */
-    public Camera setBlackboard(int numberOfPoints) {
-        this.blackboard = new Blackboard(imageWriter.getNx(), imageWriter.getNx(), width, height)
-                .setNumberOfPoints(numberOfPoints);
+    public Camera setBlackboard(int numberOfRays) {
+        this.numberOfRays = numberOfRays;
         return this;
     }
 }
