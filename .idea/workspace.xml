@@ -4,14 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="963acc02-6f7d-40d1-83cb-daf4b44206d2" name="Changes" comment="stage_8+glossy">
+    <list default="true" id="963acc02-6f7d-40d1-83cb-daf4b44206d2" name="Changes" comment="stage_8 refactor">
+      <change afterPath="$PROJECT_DIR$/uintTests/renderer/finalImage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/primitives/Vector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/primitives/Vector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/renderer/Blackboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/Blackboard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/renderer/Camera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/Camera.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/renderer/RayTracerBasic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/RayTracerBasic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uintTests/renderer/ShadowTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/uintTests/renderer/ShadowTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uintTests/renderer/SuperSampling.java" beforeDir="false" afterPath="$PROJECT_DIR$/uintTests/renderer/SuperSampling.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,22 +114,7 @@
       <recent name="geometries" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.ShadowTests.trianglesSphere">
-    <configuration name="ReflectionRefractionTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ISE5783_5863_5607" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="renderer.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="renderer" />
-      <option name="MAIN_CLASS_NAME" value="renderer.ReflectionRefractionTests" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JUnit.finalImage.finalImage">
     <configuration name="ShadowTests.trianglesSphere" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ISE5783_5863_5607" />
       <extension name="coverage">
@@ -199,13 +179,29 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="finalImage.finalImage" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ISE5783_5863_5607" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="renderer.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="renderer" />
+      <option name="MAIN_CLASS_NAME" value="renderer.finalImage" />
+      <option name="METHOD_NAME" value="finalImage" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.finalImage.finalImage" />
         <item itemvalue="JUnit.ShadowTests.trianglesSphere" />
         <item itemvalue="JUnit.SuperSampling.blurryRefractionSuperSampling" />
         <item itemvalue="JUnit.SuperSampling.glossyReflectionSuperSampling" />
         <item itemvalue="JUnit.SuperSampling.trianglesSphere3" />
-        <item itemvalue="JUnit.ReflectionRefractionTests" />
       </list>
     </recent_temporary>
   </component>
@@ -241,7 +237,8 @@
       <workItem from="1684483080628" duration="7559000" />
       <workItem from="1684839221323" duration="5727000" />
       <workItem from="1686035047875" duration="44367000" />
-      <workItem from="1686206723738" duration="10703000" />
+      <workItem from="1686206723738" duration="10762000" />
+      <workItem from="1686474132623" duration="4389000" />
     </task>
     <task id="LOCAL‎-00001" summary="start">
       <created>1677000663387</created>
@@ -376,7 +373,14 @@
       <option name="project" value="LOCAL‎" />
       <updated>1686172556140</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL‎-00020" summary="stage_8 refactor">
+      <created>1686232801069</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL‎-00020" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1686232801069</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -413,7 +417,8 @@
     <MESSAGE value="stage_7" />
     <MESSAGE value="stage_8" />
     <MESSAGE value="stage_8+glossy" />
-    <option name="LAST_COMMIT_MESSAGE" value="stage_8+glossy" />
+    <MESSAGE value="stage_8 refactor" />
+    <option name="LAST_COMMIT_MESSAGE" value="stage_8 refactor" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
