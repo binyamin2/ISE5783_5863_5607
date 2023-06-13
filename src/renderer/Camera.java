@@ -7,6 +7,7 @@ import primitives.Vector;
 
 import java.util.List;
 import java.util.MissingResourceException;
+import java.util.stream.IntStream;
 
 import static primitives.Util.*;
 
@@ -24,10 +25,16 @@ public class Camera {
     private ImageWriter imageWriter;
     private RayTracerBase rayTracer;
     private int numberOfRays = 1;
-    private boolean adaptive =false;
+    private boolean adaptive = false;
+    private boolean threads = false;
 
     public Camera setAdaptive() {
         this.adaptive = true;
+        return this;
+    }
+
+    public Camera setThreads() {
+        threads = true;
         return this;
     }
 
@@ -153,26 +160,46 @@ public class Camera {
         }
         int nx = imageWriter.getNx();
         int ny = imageWriter.getNy();
+        if (threads) {
+            if (numberOfRays == 1) {
+                IntStream.range(0, nx).parallel().forEach(x -> {
+                    IntStream.range(0, ny).parallel().forEach(y -> {
+                        Color color = this.castRay(nx, ny, x, y);
+                        this.imageWriter.writePixel(x, y, color);
+                    });
+                });
+            } else {
+                IntStream.range(0, nx).parallel().forEach(x -> {
+                    IntStream.range(0, ny).parallel().forEach(y -> {
+                        Color color = this.castRayBeam(nx, ny, x, y);
+                        this.imageWriter.writePixel(x, y, color);
+                    });
+                });
 
-        if (numberOfRays == 1) {
-            for (int x = 0; x < nx; x++) {
-                for (int y = 0; y < ny; y++) {
-                    Color color = this.castRay(nx, ny, x, y);
-                    this.imageWriter.writePixel(x, y, color);
-                }
             }
-            return this;
         } else {
-            Point pc = this.location.add(vto.scale(distance));
-            for (int x = 0; x < nx; x++) {
-                for (int y = 0; y < ny; y++) {
-                    Color color = this.castRayBeam(nx, ny, x, y, pc.getZ());
-                    this.imageWriter.writePixel(x, y, color);
+            if (numberOfRays == 1) {
+                for (int x = 0; x < nx; x++) {
+                    for (int y = 0; y < ny; y++) {
+                        Color color = this.castRay(nx, ny, x, y);
+                        this.imageWriter.writePixel(x, y, color);
+                    }
                 }
+
+            } else {
+
+                for (int x = 0; x < nx; x++) {
+                    for (int y = 0; y < ny; y++) {
+                        Color color = this.castRayBeam(nx, ny, x, y);
+                        this.imageWriter.writePixel(x, y, color);
+                    }
+                }
+
             }
-            return this;
         }
+        return this;
     }
+
 
     /**
      * cast the ray to color
@@ -194,10 +221,9 @@ public class Camera {
      * @param ny
      * @param x
      * @param y
-     * @param z
      * @return
      */
-    private Color castRayBeam(int nx, int ny, int x, int y, double z) {
+    private Color castRayBeam(int nx, int ny, int x, int y) {
         Ray centerRay=this.constructRay(nx,ny,x,y);
         Color centerColor = rayTracer.traceRay(centerRay);
         List<Ray> rayBeam = Blackboard.constructRayBeam(centerRay, 4,distance,

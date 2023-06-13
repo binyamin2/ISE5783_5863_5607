@@ -84,8 +84,25 @@ class SuperSampling {
     public void trianglesSphere3() {
         Camera        camera     = new Camera(new Point(0, 0, 1000), new Vector(0, 1, 0), new Vector(0, 0, -1))   //
                 .setVPSize(200, 200).setVPDistance(1000)                                                                       //
-                .setRayTracer(new RayTracerBasic(scene).setGlossyRaysAmount(10));
+                .setRayTracer(new RayTracerBasic(scene).setGlossyRaysAmount(10).setDiffusiveRaysAmount(10)).setThreads().setAdaptive();
         scene.setAmbientLight(new AmbientLight(new Color(WHITE), 0.15));
+
+         Geometry tri1=new Triangle(new Point(70,-40,0),new Point(40,-40,0),
+                new Point(55,-55,45)).
+                setEmission(new Color(71,20,105)).
+                setMaterial(new Material().setKs(0.8).setKt(0.8).setKd(0.2).setShininess(20));
+         Geometry tri2=new Triangle(new Point(70,-40,0),new Point(70,-70,0),
+                new Point(55,-55,45)).
+                setEmission(new Color(71,20,105)).
+                setMaterial(new Material().setKs(0.8).setKt(0.8).setKd(0.2).setDiffuseness(10).setShininess(20));
+         Geometry tri3=new Triangle(new Point(70,-70,0),new Point(40,-70,0),
+                new Point(55,-55,45)).
+                setEmission(new Color(71,20,105)).
+                setMaterial(new Material().setKs(0.8).setKt(0.8).setKd(0.2).setShininess(20));
+         Geometry tri4=new Triangle(new Point(40,-50,0),new Point(40,-20,0),
+                new Point(55,-35,45)).
+                setEmission(new Color(71,20,105)).
+                setMaterial(new Material().setKs(0.8).setKt(0.8).setKd(0.2).setShininess(20));
 
         scene.geometries.add( //
 //                new Triangle(new Point(-150, -150, -115), new Point(150, -150, -135),
@@ -102,7 +119,16 @@ class SuperSampling {
                         .setMaterial(new Material().setKd(0.9).setKs(0.3).setShininess(20).setKr(0.8)),
                 new Sphere(30d,new Point(-10, 0, -11)) //
                         .setEmission(new Color(212,100,55)) //
-                        .setMaterial(new Material().setKd(0.2).setKs(1).setShininess(200).setKr(0.8)) //
+                        .setMaterial(new Material().setKd(0.2).setKs(1).setShininess(200).setKr(0.8)),
+                new Sphere(10d,new Point(-50, 0, -11)) //
+                        .setEmission(new Color(212,10,55)) //
+                        .setMaterial(new Material().setKd(0.2).setKs(1).setShininess(200).setKr(0.8)),
+                new Sphere(7d,new Point(20, 0, -11)) //
+                        .setEmission(new Color(21,100,55)) //
+                        .setMaterial(new Material().setKd(0.2).setKs(1).setShininess(200).setKr(0.8)),
+                new Sphere(15d,new Point(-10, 34, -11)) //
+                        .setEmission(new Color(212,100,10)) //
+                        .setMaterial(new Material().setKd(0.2).setKs(1).setShininess(200).setKr(0.8))
         );
         scene.lights.add( //
                 new SpotLight(new Color(700, 400, 400), new Point(40, 40, 115), new Vector(-1, -1, -4)) //
@@ -111,7 +137,7 @@ class SuperSampling {
                 new PointLight(new Color(56, 230, 50),new Point(-10,70,-11))
                         .setKl(0.003).setKq(2E-5));
 
-        camera.setImageWriter(new ImageWriter("shadowTrianglesSphere3", 600, 600))
+        camera.setImageWriter(new ImageWriter("stage_8", 600, 600))
                 .setBlackboard(9) //
                 .renderImage() //
                 .writeToImage();
