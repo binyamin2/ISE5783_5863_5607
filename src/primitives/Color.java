@@ -18,6 +18,17 @@ public class Color {
       return rgb.equals(color.rgb);
    }
 
+   public boolean isEquals(Object o) {
+      if (this == o) return true;
+      if (o == null || getClass() != o.getClass()) return false;
+
+      Color color = (Color) o;
+
+      return Math.abs( rgb.d1-color.rgb.d1)<0.6 &&
+              Math.abs( rgb.d2-color.rgb.d2)<0.6&&
+              Math.abs( rgb.d3-color.rgb.d3)<0.6;
+   }
+
 
    /** The internal fields maintain RGB components as double numbers from 0 to
     * whatever... */

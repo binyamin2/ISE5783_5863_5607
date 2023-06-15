@@ -21,4 +21,11 @@ public abstract class RayTracerBase {
      * @return
      */
     public abstract Color traceRay(Ray ray);
+
+    public boolean adaptive = false;
+
+    public RayTracerBase setAdaptive() {
+        this.adaptive = true;
+        return this;
+    }
 }

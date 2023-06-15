@@ -28,10 +28,6 @@ public class Camera {
     private boolean adaptive = false;
     private boolean threads = false;
 
-    public Camera setAdaptive() {
-        this.adaptive = true;
-        return this;
-    }
 
     public Camera setThreads() {
         threads = true;
@@ -160,7 +156,9 @@ public class Camera {
         }
         int nx = imageWriter.getNx();
         int ny = imageWriter.getNy();
+        //if wamt to use threads
         if (threads) {
+            // if want to do anti alaysing
             if (numberOfRays == 1) {
                 IntStream.range(0, nx).parallel().forEach(x -> {
                     IntStream.range(0, ny).parallel().forEach(y -> {
@@ -177,6 +175,7 @@ public class Camera {
                 });
 
             }
+            //without threads
         } else {
             if (numberOfRays == 1) {
                 for (int x = 0; x < nx; x++) {
@@ -235,16 +234,12 @@ public class Camera {
             Color c = rayTracer.traceRay(ray);
             average = average.add(rayTracer.traceRay(ray));
         }
-        //chack for addaptive
+        //chack for addaptive if the ray beam return the same color of the fenter return the color
 
-
-
-        if (adaptive && centerColor.equals(average.reduce(4))){
-            if (!centerColor.equals(Color.BLACK))
-                return centerColor;
+        if (rayTracer.adaptive && centerColor.isEquals(average.reduce(4))){
             return centerColor;}
 
-
+        //else continue with calculate
         rayBeam = Blackboard.constructRayBeam(centerRay, numberOfRays - 4,distance,
                 this.width/nx,this.height/ny);
 

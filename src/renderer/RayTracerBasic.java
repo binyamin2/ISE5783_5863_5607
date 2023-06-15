@@ -17,9 +17,10 @@ import static primitives.Util.isZero;
 public class RayTracerBasic extends RayTracerBase {
 
     private static final double DELTA = 0.1;
-    private static final int MAX_CALC_COLOR_LEVEL = 2;
+    private static final int MAX_CALC_COLOR_LEVEL = 3;
     private static final double MIN_CALC_COLOR_K = 0.001;
     private static final Double3 INITIAL_K = Double3.ONE;
+
 
 
     /**
@@ -125,22 +126,8 @@ public class RayTracerBasic extends RayTracerBase {
             double glossiness = material.glossiness;
 
             if (material.isGlossy()) { // glossiness = glossy reflection
-               // construct a ray beam for glossiness
-
-                List<Ray> rayList = Blackboard.constructRayBeam(centerReflectedRay, glossyRaysAmount,
-                        distanceFromTargetArea, glossiness,glossiness);
-
-                int beamSize = rayList.size();
-                //calc average of the ray beam
-                for (Ray r : rayList) {
-                    double nr = n.dotProduct(r.getV0());
-                    double nc = n.dotProduct(centerReflectedRay.getV0());
-                    if (nr * nc > 0) // the ray has to be in the normal direction to be reflected correctly
-                        color = color.add(calcGlobalEffect(r, level, material.kR, kkr));
-                    else
-                        beamSize--;
-                }
-                color = color.reduce(beamSize);
+               // construct a ray beam for glossiness and return the color
+                color= calcColorHelper(centerReflectedRay,n,level,glossyRaysAmount,kkr,glossiness,material.kR);
 
             } else
                 color = calcGlobalEffect(centerReflectedRay, level, material.kR, kkr);
@@ -152,20 +139,8 @@ public class RayTracerBasic extends RayTracerBase {
             double diffuseness = material.diffuseness;
 
             if (material.isDiffusive()) { // diffuseness = diffusive refraction
-
-                List<Ray> rayList = Blackboard.constructRayBeam(centerRefractedRay, diffusiveraysamount,
-                        distanceFromTargetArea, diffuseness,diffuseness);
-                int beamSize = rayList.size();
-                //calc average of the ray beam
-                for (Ray r : rayList) {
-                    double nr = n.dotProduct(r.getV0());
-                    double nc = n.dotProduct(centerRefractedRay.getV0());
-                    if (nr * nc > 0)// the ray has to be in the opposite direction of the normal refracted correctly
-                        color = color.add(calcGlobalEffect(r, level, material.kT, kkt));
-                    else
-                        beamSize--;
-                }
-                color = color.reduce(beamSize); // average the color
+                // construct a ray beam for diffuseness and return the color
+                color= calcColorHelper(centerRefractedRay,n,level,diffusiveraysamount,kkt,diffuseness,material.kT);
             } else
                 color = color.add(calcGlobalEffect(centerRefractedRay, level, material.kT, kkt));
 
@@ -252,39 +227,6 @@ public class RayTracerBasic extends RayTracerBase {
         return material.kD.scale(Math.abs(nl));
     }
 
-//    /**
-//     * check if the point is shaded
-//     * @param gp
-//     * @param l
-//     * @param n
-//     * @param nl
-//     * @return
-//     */
-//    private boolean unshaded(GeoPoint gp,LightSource light, Vector l, Vector n, double nl) {
-//        if (!gp.geometry.getMaterial().kT.equals(Double3.ZERO))
-//            return true;
-//        Vector lightDirection = l.scale(-1); // from point to light source
-//        Vector epsVector = n.scale(nl < 0 ? DELTA : -DELTA);
-//        Point point = gp.point.add(epsVector);
-//        Ray lightRay = new Ray(point, lightDirection);
-//        List<GeoPoint> intersections = scene.geometries.findGeoIntersections(lightRay);
-//
-//
-//        if (intersections == null) return true;
-//        //return that shaded if its diractional light
-//        /*if (light instanceof DirectionalLight)
-//            return false;*/
-//        //check if there is pointbetween the light and geoPoint
-//
-//        double lightDistance = light.getDistance(point);
-//        for (GeoPoint geo : intersections) {
-//            if (point.distance(geo.point) < lightDistance ) {
-//                return false;
-//            }
-//        }
-//
-//        return true;
-//    }
 
     /**
      * return the level of the shadow
@@ -315,7 +257,6 @@ public class RayTracerBasic extends RayTracerBase {
     /**
      * constract the new ray for reflection
      * @param gp
-     * @param ray
      * @param n
      * @return
      */
@@ -350,4 +291,69 @@ public class RayTracerBasic extends RayTracerBase {
         return ray.findClosestGeoPoint(intersections);
     }
 
+    /**
+     * dunction that calculate ray beam color with/without adaptive super sampling
+     * @param centerRay
+     * @param n
+     * @param level
+     * @param raysAmount
+     * @param kkx
+     * @param glossOrDiffus
+     * @param matirialKx
+     * @return
+     */
+    private Color calcColorHelper(Ray centerRay, Vector n, int level, int raysAmount,
+                                  Double3 kkx, double glossOrDiffus, Double3 matirialKx ){
+        Color color = Color.BLACK;
+        if(adaptive){
+            List<Ray> rayList = Blackboard.constructRayBeam(centerRay, 4,
+                    distanceFromTargetArea, glossOrDiffus,glossOrDiffus);
+            int beamSize = rayList.size();
+            //calc average of the ray beam
+            for (Ray r : rayList) {
+                double nr = n.dotProduct(r.getV0());
+                double nc = n.dotProduct(centerRay.getV0());
+                if (nr * nc > 0) // the ray has to be in the normal direction to be reflected correctly
+                    color = color.add(calcGlobalEffect(r, level, matirialKx, kkx));
+                else
+                    beamSize--;
+            }
+            Color centerColor=calcGlobalEffect(centerRay,level,matirialKx,kkx);
+            if (centerColor.isEquals(color.reduce(beamSize))){
+                return centerColor;
+            }
+            else {
+                rayList = Blackboard.constructRayBeam(centerRay,  raysAmount-4,
+                        distanceFromTargetArea, glossOrDiffus,glossOrDiffus);
+                beamSize += rayList.size();
+                //calc average of the ray beam
+                for (Ray r : rayList) {
+                    double nr = n.dotProduct(r.getV0());
+                    double nc = n.dotProduct(centerRay.getV0());
+                    if (nr * nc > 0) // the ray has to be in the normal direction to be reflected correctly
+                        color = color.add(calcGlobalEffect(r, level, matirialKx, kkx));
+                    else
+                        beamSize--;
+                }
+                return color.reduce(beamSize);
+
+            }
+        }
+        else {
+            List<Ray> rayList = Blackboard.constructRayBeam(centerRay, glossyRaysAmount,
+                    distanceFromTargetArea, glossOrDiffus, glossOrDiffus);
+            int beamSize = rayList.size();
+            //calc average of the ray beam
+            for (Ray r : rayList) {
+                double nr = n.dotProduct(r.getV0());
+                double nc = n.dotProduct(centerRay.getV0());
+                if (nr * nc > 0) // the ray has to be in the normal direction to be reflected correctly
+                    color = color.add(calcGlobalEffect(r, level, matirialKx, kkx));
+                else
+                    beamSize--;
+            }
+            return color.reduce(beamSize);
+        }
+
+    }
 }

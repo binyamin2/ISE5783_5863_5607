@@ -4,9 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="963acc02-6f7d-40d1-83cb-daf4b44206d2" name="Changes" comment="stage_8 start finall image">
+    <list default="true" id="963acc02-6f7d-40d1-83cb-daf4b44206d2" name="Changes" comment="stage_9">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/primitives/Color.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/primitives/Color.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/renderer/Camera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/Camera.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/renderer/RayTracerBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/RayTracerBase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/renderer/RayTracerBasic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/RayTracerBasic.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/uintTests/renderer/SuperSampling.java" beforeDir="false" afterPath="$PROJECT_DIR$/uintTests/renderer/SuperSampling.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/uintTests/renderer/finalImage.java" beforeDir="false" afterPath="$PROJECT_DIR$/uintTests/renderer/finalImage.java" afterDir="false" />
     </list>
@@ -227,7 +230,9 @@
       <workItem from="1684246568886" duration="4040000" />
       <workItem from="1684483080628" duration="7559000" />
       <workItem from="1684839221323" duration="5727000" />
-      <workItem from="1686662225836" duration="7996000" />
+      <workItem from="1686662225836" duration="8108000" />
+      <workItem from="1686741359106" duration="5106000" />
+      <workItem from="1686823992756" duration="8059000" />
     </task>
     <task id="LOCAL‎-00001" summary="start">
       <created>1677000663387</created>
@@ -341,7 +346,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685606717417</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL‎-00017" summary="stage_9">
+      <created>1686671151329</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL‎-00017" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1686671151329</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -375,7 +387,8 @@
     <MESSAGE value="lighting and local effects" />
     <MESSAGE value="add test for multiple lights" />
     <MESSAGE value="Finish Shadow" />
-    <option name="LAST_COMMIT_MESSAGE" value="Finish Shadow" />
+    <MESSAGE value="stage_9" />
+    <option name="LAST_COMMIT_MESSAGE" value="stage_9" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -424,11 +437,6 @@
           <url>file://$PROJECT_DIR$/uintTests/renderer/ShadowTests.java</url>
           <line>39</line>
           <option name="timeStamp" value="70" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/renderer/Camera.java</url>
-          <line>243</line>
-          <option name="timeStamp" value="83" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

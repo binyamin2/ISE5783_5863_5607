@@ -13,7 +13,7 @@ public class finalImage {
     Material material =new Material();
     public Camera camera = new Camera(new Point(1000, 0, 500), new Vector(-1, 0, 2),
             new Vector(-1, 0, -0.5)) //
-            .setVPSize(170, 170).setVPDistance(700).setAdaptive();
+            .setVPSize(170, 170).setVPDistance(700);
     public Geometry lightSphere=new Sphere(5,new Point(15,30,20))
             .setMaterial(new Material().setKt(1).setKd(0.7).setKs(0.3).setDiffuseness(20).setShininess(10));
     public Geometry bigSphere=new Sphere(25,new Point(33,47,54))
@@ -63,8 +63,8 @@ public class finalImage {
 //                new Vector(-114,-53,18)).setKl(0.004).setKq(0.00006));
 
         camera.setImageWriter(new ImageWriter("finalImage", 500, 500)) //
-                .setRayTracer(new RayTracerBasic(scene).setDiffusiveRaysAmount(10).setGlossyRaysAmount(10)).
-                setBlackboard(9) //
+                .setRayTracer(new RayTracerBasic(scene).setDiffusiveRaysAmount(10).setGlossyRaysAmount(10).setAdaptive()).
+                setBlackboard(9)
                 .renderImage() //
                 .writeToImage();
 
