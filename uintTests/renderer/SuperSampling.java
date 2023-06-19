@@ -84,7 +84,7 @@ class SuperSampling {
     public void trianglesSphere3() {
         Camera        camera     = new Camera(new Point(0, 0, 1000), new Vector(0, 1, 0), new Vector(0, 0, -1))   //
                 .setVPSize(200, 200).setVPDistance(1000)                                                                       //
-                .setRayTracer(new RayTracerBasic(scene).setGlossyRaysAmount(7).setDiffusiveRaysAmount(10).setAdaptive()).setThreads();
+                .setRayTracer(new RayTracerBasic(scene).setAdaptive()).setThreads();
         scene.setAmbientLight(new AmbientLight(new Color(WHITE), 0.15));
 
         scene.geometries.add( //
@@ -94,9 +94,9 @@ class SuperSampling {
 //                new Triangle(new Point(-150, -150, -115), new Point(-70, 70, -140), new Point(75, 75, -150)) //
 //                        .setMaterial(new Material().setKd(0.25).setKs(1).setShininess(200).setKr(1).setGlossiness(5)),
                 new Plane(new Point(0,-30,-11),new Vector(0, 1, 0))
-                        .setMaterial(new Material().setKd(0.25).setKs(1).setShininess(200).setKr(1).setGlossiness(5)),
+                        .setMaterial(new Material().setKd(0.25).setKs(1).setShininess(200).setKr(1)),
                 new Plane(new Point(0,-30,-110),new Vector(0, 0, 1))
-                        .setMaterial(new Material().setKd(0.25).setKs(1).setShininess(200).setKr(1).setGlossiness(5)),
+                        .setMaterial(new Material().setKd(0.25).setKs(1).setShininess(200).setKr(1)),
                 new Cylinder(10,new Ray(new Point(40,10,-11),new Vector(1,1,0)),50)
                         .setEmission(new Color(13,140,179)) //
                         .setMaterial(new Material().setKd(0.9).setKs(0.1).setShininess(100).setKt(0.8)),
@@ -120,8 +120,7 @@ class SuperSampling {
                 new PointLight(new Color(56, 230, 50),new Point(-10,70,-11))
                         .setKl(0.003).setKq(2E-5));
 
-        camera.setImageWriter(new ImageWriter("stage_8_3", 600, 600))
-                .setBlackboard(81) //
+        camera.setImageWriter(new ImageWriter("stage_8 without improvement", 1000, 1000))
                 .renderImage() //
                 .writeToImage();
     }
