@@ -24,9 +24,9 @@ public class Color {
 
       Color color = (Color) o;
 
-      return Math.abs( rgb.d1-color.rgb.d1)<0.6 &&
-              Math.abs( rgb.d2-color.rgb.d2)<0.6&&
-              Math.abs( rgb.d3-color.rgb.d3)<0.6;
+      return Math.abs( rgb.d1-color.rgb.d1)<1 &&
+              Math.abs( rgb.d2-color.rgb.d2)<1&&
+              Math.abs( rgb.d3-color.rgb.d3)<1;
    }
 
 
