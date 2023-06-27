@@ -45,11 +45,11 @@ public class finalImage {
             .setMaterial(new Material().setKd(0.25).setKs(0.7).setKr(1).setShininess(200));
     public Geometry floor=new Polygon(new Point(0,-90,0),new Point(0,90,0),
             new Point(150,90,0),new Point(150,-90,0))
-            .setMaterial(new Material().setKd(0.25).setKs(0.9).setShininess(200).setGlossiness(40).setKr(1));
+            .setMaterial(new Material().setKd(0.25).setKs(0.9).setShininess(200).setGlossiness(20).setKr(1));
 
     public Geometry wall=new Polygon(new Point(-100, -80, 80),new Point(-100, 80, 80),
             new Point(-80, 90, -10),new Point(-80, -90, -10))
-            .setMaterial(new Material().setKd(0.25).setKs(1).setShininess(200).setKr(1).setGlossiness(15));
+            .setMaterial(new Material().setKd(0.25).setKs(1).setShininess(200).setKr(1).setGlossiness(10));
     public Geometry tri1=new Triangle(new Point(70,-45,0),new Point(25,-25,0),
             new Point(50,-45,55)).
             setEmission(new Color(71,20,105)).
@@ -97,6 +97,38 @@ public class finalImage {
             new Point(-51, -52, 70)).
             setEmission(starGold2).
             setMaterial(new Material().setKs(0.2).setKd(0.8).setShininess(100));
+    public Geometry triStarR1=new Triangle(new Point(-35, 40, 55),new Point(-35, 80, 55),
+            new Point(-42, 60, 80)).
+            setEmission(starGold).
+            setMaterial(new Material().setKs(0.2).setKd(0.8).setShininess(100));
+    public Geometry triStarR11=new Triangle(new Point(-35, 80, 55),new Point(-62, 62, 50),
+            new Point(-42, 60, 80)).
+            setEmission(starGold).
+            setMaterial(new Material().setKs(0.2).setKd(0.8).setShininess(100));
+    public Geometry triStarR12=new Triangle(new Point(-35, 40, 55),new Point(-62, 62, 50),
+            new Point(-42, 60, 80)).
+            setEmission(starGold).
+            setMaterial(new Material().setKs(0.2).setKd(0.8).setShininess(100));
+    public Geometry triStarR13=new Triangle(new Point(-35, 40, 55),new Point(-62, 62, 50),
+            new Point(-35, 80, 55)).
+            setEmission(starGold).
+            setMaterial(new Material().setKs(0.2).setKd(0.8).setShininess(100));
+    public Geometry tristarR2=new Triangle(new Point(-20, 60, 70),new Point(-51, 78, 70),
+            new Point(-42, 60, 40)).
+            setEmission(starGold2).
+            setMaterial(new Material().setKs(0.2).setKd(0.8).setShininess(100));
+    public Geometry tristarR21=new Triangle(new Point(-51, 44, 70),new Point(-51, 78, 70),
+            new Point(-42, 60, 40)).
+            setEmission(starGold2).
+            setMaterial(new Material().setKs(0.2).setKd(0.8).setShininess(100));
+    public Geometry tristarR22=new Triangle(new Point(-51, 44, 70),new Point(-20, 60, 70),
+            new Point(-42, 60, 40)).
+            setEmission(starGold2).
+            setMaterial(new Material().setKs(0.2).setKd(0.8).setShininess(100));
+    public Geometry tristarR23=new Triangle(new Point(-51, 44, 70),new Point(-20, 60, 70),
+            new Point(-51, 78, 70)).
+            setEmission(starGold2).
+            setMaterial(new Material().setKs(0.2).setKd(0.8).setShininess(100));
   /*  public Geometry tube=new Tube(5,new Ray(new Point(33,47,54),new Vector(-117,-153,104))).
             setEmission(new Color(239,33,74)).
             setMaterial(new Material().setKd(0.7).setKs(0.3).setShininess(20));*/
@@ -104,7 +136,8 @@ public class finalImage {
     public void finalImage(){
         scene.geometries.add(floor,wall,bigSphere,tri1,tri2,tri3,cyl,lightSphere1,lightSphere2,lightSphere3,
                 lightSphere4,lightSphere5,lightSphere6,lightSphere7,lightSphere8, lightSphere9,triStar1,
-                triStar11,triStar12,triStar13,tristar2,tristar21,tristar22,tristar23);
+                triStar11,triStar12,triStar13,tristar2,tristar21,tristar22,tristar23,triStarR1,
+                triStarR11,triStarR12,triStarR13,tristarR2,tristarR21,tristarR22,tristarR23);
         scene.setAmbientLight(new AmbientLight(new Color(WHITE), 0.15));
         scene.lights.add(new SpotLight(new Color(700, 400, 400), new Point(40, 40, 300), new Vector(-1, -1, -4)) //
                 .setKl(0.003).setKq(2E-5));
@@ -122,9 +155,8 @@ public class finalImage {
 //        scene.lights.add(new SpotLight(new Color(33, 239, 47),new Point(450,300,40),
 //                new Vector(-114,-53,18)).setKl(0.004).setKq(0.00006));
 
-        camera.setImageWriter(new ImageWriter("finalImage", 1200, 1200)) //
-                .setRayTracer(new RayTracerBasic(scene).setGlossyRaysAmount(15).setDiffusiveRaysAmount(25).setAdaptive())
-                .setThreads()
+        camera.setImageWriter(new ImageWriter("finalImage final without performance", 1200, 1200)) //
+                .setRayTracer(new RayTracerBasic(scene).setGlossyRaysAmount(15).setDiffusiveRaysAmount(25))
                 .setBlackboard(81)
                 .renderImage() //
                 .writeToImage();

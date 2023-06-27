@@ -257,7 +257,7 @@ public class Camera {
      * @param interval
      * @param color
      */
-    public void printGrid(int interval, Color color) {
+    public Camera printGrid(int interval, Color color) {
         if (this.imageWriter == null) {
             throw new MissingResourceException("iw is missing", "ImageWriter", "iw");
         }
@@ -269,6 +269,7 @@ public class Camera {
 
             }
         }
+        return this;
     }
 
     /**

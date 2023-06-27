@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="963acc02-6f7d-40d1-83cb-daf4b44206d2" name="Changes" comment="stage_9 build final image">
+    <list default="true" id="963acc02-6f7d-40d1-83cb-daf4b44206d2" name="Changes" comment="final">
+      <change afterPath="$PROJECT_DIR$/uintTests/spacial/TeapotTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/primitives/Color.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/primitives/Color.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/renderer/Camera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/Camera.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/uintTests/renderer/finalImage.java" beforeDir="false" afterPath="$PROJECT_DIR$/uintTests/renderer/finalImage.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -113,14 +114,6 @@
     </key>
   </component>
   <component name="RunManager" selected="JUnit.finalImage.finalImage">
-    <configuration name="All in ISE5783_5863_5607" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ISE5783_5863_5607" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="TEST_OBJECT" value="package" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="SuperSampling.glossyReflectionSuperSampling" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ISE5783_5863_5607" />
       <extension name="coverage">
@@ -149,6 +142,21 @@
       <option name="MAIN_CLASS_NAME" value="renderer.SuperSampling" />
       <option name="METHOD_NAME" value="trianglesSphere3" />
       <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TeapotTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ISE5783_5863_5607" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="uinitTests.spacial.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="uinitTests.spacial" />
+      <option name="MAIN_CLASS_NAME" value="uinitTests.spacial.TeapotTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -187,10 +195,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.finalImage.finalImage" />
+        <item itemvalue="JUnit.TeapotTest" />
         <item itemvalue="JUnit.finalImage" />
         <item itemvalue="JUnit.SuperSampling.trianglesSphere3" />
         <item itemvalue="JUnit.SuperSampling.glossyReflectionSuperSampling" />
-        <item itemvalue="JUnit.All in ISE5783_5863_5607" />
       </list>
     </recent_temporary>
   </component>
@@ -230,6 +238,7 @@
       <workItem from="1686823992756" duration="10214000" />
       <workItem from="1686842235600" duration="319000" />
       <workItem from="1687162095318" duration="3494000" />
+      <workItem from="1687803137122" duration="5097000" />
     </task>
     <task id="LOCAL‎-00001" summary="start">
       <created>1677000663387</created>
@@ -357,7 +366,14 @@
       <option name="project" value="LOCAL‎" />
       <updated>1686835217135</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL‎-00019" summary="check">
+      <created>1687255386330</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL‎-00019" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1687255386330</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -393,7 +409,9 @@
     <MESSAGE value="Finish Shadow" />
     <MESSAGE value="stage_9" />
     <MESSAGE value="stage_9 refactor" />
-    <option name="LAST_COMMIT_MESSAGE" value="stage_9 refactor" />
+    <MESSAGE value="check" />
+    <MESSAGE value="final" />
+    <option name="LAST_COMMIT_MESSAGE" value="final" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
